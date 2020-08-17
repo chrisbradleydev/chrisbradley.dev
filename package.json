@@ -1,0 +1,27 @@
+{
+    "name": "christopherbradley.dev",
+    "description": "Christopher Bradley's personal website",
+    "version": "1.0.0",
+    "private": true,
+    "author": "Christopher Bradley <contact@christopherbradley.dev> (https://christopherbradley.dev)",
+    "repository": "https://github.com/ctbradley/christopherbradley.dev",
+    "license": "ISC",
+    "scripts": {
+        "build": "next build",
+        "dev": "next dev",
+        "start": "next start"
+    },
+    "dependencies": {
+        "next": "^9.5.2",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1"
+    },
+    "devDependencies": {
+        "husky": "^4.2.5",
+        "lint-staged": "^10.2.11"
+    },
+    "browserslist": [
+        ">1%",
+        "not dead"
+    ]
+}
