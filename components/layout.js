@@ -1,9 +1,10 @@
 import Head from 'next/head';
+import PropTypes from 'prop-types';
 import styles from './layout.module.css';
 
 export const fullName = 'Christopher Bradley';
 
-export default function Layout({ children }) {
+function Layout({ children }) {
     return (
         <div className={styles.container}>
             <Head></Head>
@@ -13,3 +14,9 @@ export default function Layout({ children }) {
         </div>
     );
 }
+
+Layout.propTypes = {
+    children: PropTypes.array.isRequired,
+};
+
+export default Layout;
