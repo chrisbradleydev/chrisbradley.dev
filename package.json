@@ -19,7 +19,7 @@
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx}": "eslint --fix",
-        "*.{js,jsx,ts,tsx,md,html,css}": "prettier --write"
+        "*.{js,jsx,ts,tsx,md,html,css,scss}": "prettier --write"
     },
     "dependencies": {
         "next": "^9.5.2",
@@ -31,7 +31,8 @@
         "eslint-plugin-react": "^7.20.6",
         "husky": "^4.2.5",
         "lint-staged": "^10.2.11",
-        "prettier": "2.0.5"
+        "prettier": "2.0.5",
+        "sass": "^1.26.10"
     },
     "browserslist": [
         ">1%",

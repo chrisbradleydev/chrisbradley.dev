@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import PropTypes from 'prop-types';
-import styles from './layout.module.css';
+import styles from './layout.module.scss';
 
 export const fullName = 'Christopher Bradley';
 
