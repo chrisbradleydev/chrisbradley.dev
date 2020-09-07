@@ -1,16 +1,18 @@
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 import styles from './layout.module.scss';
+import Nav from './nav';
 
 export const fullName = 'Christopher Bradley';
 
 function Layout({ children }) {
     return (
         <div className={styles.container}>
-            <Head></Head>
-            <header className={styles.header}></header>
+            <Head />
+            <Nav />
+            <header />
             <main>{children}</main>
-            <footer></footer>
+            <footer />
         </div>
     );
 }

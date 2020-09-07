@@ -1,0 +1,15 @@
+.nav {
+    height: 60px;
+
+    &__section {
+        position: relative;
+    }
+
+    &__right {
+        float: right;
+    }
+
+    &__left {
+        float: left;
+    }
+}

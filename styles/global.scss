@@ -13,7 +13,7 @@ body {
 }
 
 a {
-    color: #0070f3;
+    color: var(--color-pink);
     text-decoration: none;
 }
 
@@ -24,4 +24,18 @@ a:hover {
 img {
     max-width: 100%;
     display: block;
+}
+
+ol,
+ul {
+    list-style-type: none;
+}
+
+:root {
+    --color-black: #0e0e25;
+    --color-white: #f7f8f9;
+    --color-gray: #bcbdc2;
+    --color-pink: #f92e97;
+    --color-green: #6fdacc;
+    --color-yellow: #f6d83a;
 }
