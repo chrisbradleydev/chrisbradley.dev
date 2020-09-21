@@ -1,3 +1,3 @@
-# christopherbradley.dev
+# chrisbradley.dev
 
-> Christopher Bradley's personal website
+> Chris Bradley's personal website

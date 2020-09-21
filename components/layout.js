@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './layout.module.scss';
 import Nav from './nav';
 
-export const fullName = 'Christopher Bradley';
+export const fullName = 'Chris Bradley';
 
 function Layout({ children }) {
     return (
