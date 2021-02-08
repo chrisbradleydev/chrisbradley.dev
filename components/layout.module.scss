@@ -1,3 +1,20 @@
 .container {
-    //
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    &__footer {
+        background-color: var(--color-green);
+        flex-shrink: 0;
+        padding: 100px 20px;
+    }
+
+    &__header {
+        //
+    }
+
+    &__main {
+        flex-grow: 1;
+        padding: 20px;
+    }
 }
