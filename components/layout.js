@@ -7,8 +7,9 @@ export const fullName = 'Chris Bradley';
 function Layout({ children }) {
     return (
         <div className={styles.container}>
+            <Nav />
             <header className={styles.container__header}>
-                <Nav />
+                <div style={{ height: '600px' }} />
             </header>
             <main className={styles.container__main}>{children}</main>
             <footer className={styles.container__footer} />
