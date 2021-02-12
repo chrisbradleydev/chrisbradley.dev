@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import debounce from '@@/utils/debounce';
-import '@@/styles/global.scss';
+import '@@/styles/main.scss';
 
 function App({ Component, pageProps }) {
     useEffect(() => {
-        const debouncedScroll = debounce(handleScroll);
+        const debouncedScroll = debounce(handleScroll, 50);
         document.addEventListener('scroll', debouncedScroll);
         return () => document.removeEventListener('scroll', debouncedScroll);
     }, []);

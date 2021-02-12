@@ -1,4 +1,7 @@
+@import 'animations';
+
 .nav {
+    animation: slide-fade-top 500ms;
     height: 60px;
     width: 100%;
 

@@ -1,0 +1,14 @@
+@import 'animations';
+@import 'colors';
+@import 'reset';
+
+body.scrolled {
+    padding-top: 60px;
+
+    nav {
+        box-shadow: 0 1px 20px 0 rgba(14, 14, 37, 0.1);
+        position: fixed;
+        top: 0;
+        z-index: 1;
+    }
+}
