@@ -1,15 +1,17 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import '../styles/global.scss';
+import debounce from '@@/utils/debounce';
+import '@@/styles/global.scss';
 
 function App({ Component, pageProps }) {
     useEffect(() => {
-        document.addEventListener('scroll', handleScroll);
-        return () => document.removeEventListener('scroll', handleScroll);
-    }, [handleScroll]);
+        const debouncedScroll = debounce(handleScroll);
+        document.addEventListener('scroll', debouncedScroll);
+        return () => document.removeEventListener('scroll', debouncedScroll);
+    }, []);
 
     function handleScroll() {
-        document.documentElement.dataset.scroll = window.scrollY;
+        document.body.classList.toggle('scrolled', window.scrollY > 0);
     }
 
     return <Component {...pageProps} />;
