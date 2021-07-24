@@ -9,7 +9,7 @@
     "scripts": {
         "build": "next build",
         "dev": "next dev",
-        "lint": "eslint .",
+        "lint": "next lint",
         "start": "next start"
     },
     "husky": {
@@ -18,21 +18,22 @@
         }
     },
     "lint-staged": {
-        "*.{js,jsx,ts,tsx}": "eslint --fix",
+        "*.{js,jsx,ts,tsx}": "next lint --fix",
         "*.{js,jsx,ts,tsx,md,html,css,scss}": "prettier --write"
     },
     "dependencies": {
-        "next": "^10.0.6",
-        "react": "^17.0.1",
-        "react-dom": "^17.0.1"
+        "next": "^11.0.1",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2"
     },
     "devDependencies": {
-        "eslint": "^7.19.0",
-        "eslint-plugin-react": "^7.22.0",
-        "husky": "^4.3.8",
-        "lint-staged": "^10.5.4",
-        "prettier": "2.2.1",
-        "sass": "^1.32.6"
+        "eslint": "^7.31.0",
+        "eslint-config-next": "^11.0.1",
+        "eslint-config-prettier": "^8.3.0",
+        "husky": "^7.0.1",
+        "lint-staged": "^11.1.0",
+        "prettier": "2.3.2",
+        "sass": "^1.36.0"
     },
     "browserslist": [
         ">1%",
