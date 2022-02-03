@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Logo from '../components/logo';
 import styles from './nav.module.scss';
 
 function Nav() {
@@ -9,7 +10,9 @@ function Nav() {
                 <ul className={styles.nav__left}>
                     <li>
                         <Link href="/">
-                            <a>CBD</a>
+                            <a>
+                                <Logo />
+                            </a>
                         </Link>
                     </li>
                 </ul>
