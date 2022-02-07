@@ -3,10 +3,10 @@
     width: auto;
 
     &__fill {
-        fill: #6fdacc;
+        fill: var(--color-green);
     }
 
     &__stroke {
-        fill: #0e0e25;
+        fill: var(--color-black);
     }
 }
