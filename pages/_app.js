@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import debounce from '@@/utils/debounce';
-import '@@/styles/main.scss';
+import '@@/styles/globals.css';
 
 function App({ Component, pageProps }) {
     useEffect(() => {

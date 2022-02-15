@@ -7,7 +7,9 @@ function Home() {
             <Head>
                 <title>{fullName}</title>
             </Head>
-            <section></section>
+            <section className="h-screen">
+                <div />
+            </section>
         </Layout>
     );
 }
