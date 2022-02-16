@@ -28,23 +28,25 @@ NavItem.propTypes = {
 
 function Nav() {
     return (
-        <nav className="flex items-center justify-between max-w-8xl mx-auto">
-            <ul className="flex items-center justify-center">
-                <li>
-                    <Link href="/">
-                        <a className="inline-block px-5 py-2">
-                            <Logo />
-                        </a>
-                    </Link>
-                </li>
-            </ul>
-            <ul className="hidden lg:flex">
-                {navItems.map(({ href, text }) => (
-                    <NavItem key={text.toLowerCase().replace(/\s/g, '-')} href={href} text={text} />
-                ))}
-            </ul>
-            <ul className="flex items-center justify-center"></ul>
-        </nav>
+        <div className="px-5vw py-4 lg:py-8">
+            <nav className="flex items-center justify-between max-w-8xl mx-auto">
+                <ul className="flex items-center justify-center">
+                    <li>
+                        <Link href="/">
+                            <a className="inline-block px-5 py-2">
+                                <Logo />
+                            </a>
+                        </Link>
+                    </li>
+                </ul>
+                <ul className="hidden lg:flex">
+                    {navItems.map(({ href, text }) => (
+                        <NavItem key={text.toLowerCase().replace(/\s/g, '-')} href={href} text={text} />
+                    ))}
+                </ul>
+                <ul className="flex items-center justify-center"></ul>
+            </nav>
+        </div>
     );
 }
 

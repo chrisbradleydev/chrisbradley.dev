@@ -4,7 +4,11 @@ module.exports = {
     content: ['./pages/**/*.{js,jsx,ts,tsx}', './components/**/*.{js,jsx,ts,tsx}'],
     theme: {
         // colors: {},
-        // extend: {},
+        extend: {
+            spacing: {
+                '5vw': '5vw',
+            },
+        },
         // screens: {},
     },
     variants: {
