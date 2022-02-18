@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Logo from '../components/logo';
+import Moon from '../components/moon';
+import Sun from '../components/sun';
 
 const navItems = [
     { href: '/', text: 'Uno' },
@@ -27,6 +30,10 @@ NavItem.propTypes = {
 };
 
 function Nav() {
+    const [darkMode, setDarkMode] = useState(1);
+    function toggleDarkMode() {
+        setDarkMode(darkMode ? 0 : 1);
+    }
     return (
         <div className="px-5vw py-4 lg:py-8">
             <nav className="flex items-center justify-between max-w-8xl mx-auto">
@@ -44,7 +51,13 @@ function Nav() {
                         <NavItem key={text.toLowerCase().replace(/\s/g, '-')} href={href} text={text} />
                     ))}
                 </ul>
-                <ul className="flex items-center justify-center"></ul>
+                <ul className="hidden lg:flex items-center justify-center">
+                    <li>
+                        <button className="inline-block px-5 py-2" onClick={toggleDarkMode}>
+                            {darkMode ? <Moon /> : <Sun />}
+                        </button>
+                    </li>
+                </ul>
             </nav>
         </div>
     );
