@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Logo from '../components/logo';
 import Moon from '../components/moon';
 import Sun from '../components/sun';
+import { Theme, useTheme } from '../contexts/theme-provider';
 
 const navItems = [
     { href: '/', text: 'Uno' },
@@ -18,7 +19,7 @@ function NavItem({ href, text }) {
     return (
         <li className="px-8 py-2">
             <Link href={href}>
-                <a className="block hover:text-pink-300 text-lg">{text}</a>
+                <a className="block dark:hover:text-pink-300 hover:text-pink-400 text-lg">{text}</a>
             </Link>
         </li>
     );
@@ -30,10 +31,7 @@ NavItem.propTypes = {
 };
 
 function Nav() {
-    const [darkMode, setDarkMode] = useState(1);
-    function toggleDarkMode() {
-        setDarkMode(darkMode ? 0 : 1);
-    }
+    const [theme, setTheme] = useTheme();
     return (
         <div className="px-5vw py-4 lg:py-8">
             <nav className="flex items-center justify-between max-w-8xl mx-auto">
@@ -53,8 +51,13 @@ function Nav() {
                 </ul>
                 <ul className="hidden lg:flex items-center justify-center">
                     <li>
-                        <button className="inline-block px-5 py-2" onClick={toggleDarkMode}>
-                            {darkMode ? <Moon /> : <Sun />}
+                        <button
+                            className="inline-block px-5 py-2"
+                            onClick={() => {
+                                setTheme(previousTheme => (previousTheme === Theme.DARK ? Theme.LIGHT : Theme.DARK));
+                            }}
+                        >
+                            {theme === Theme.DARK ? <Moon /> : <Sun />}
                         </button>
                     </li>
                 </ul>

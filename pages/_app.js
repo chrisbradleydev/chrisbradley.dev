@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
+import { Theme, ThemeProvider } from '@@/contexts/theme-provider';
 import debounce from '@@/utils/debounce';
 import '@@/styles/globals.css';
 
@@ -14,7 +15,11 @@ function App({ Component, pageProps }) {
         document.body.classList.toggle('scrolled', window.scrollY > 0);
     }
 
-    return <Component {...pageProps} />;
+    return (
+        <ThemeProvider specifiedTheme={Theme.DARK}>
+            <Component {...pageProps} />
+        </ThemeProvider>
+    );
 }
 
 App.propTypes = {

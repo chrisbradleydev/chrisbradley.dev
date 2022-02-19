@@ -1,11 +1,13 @@
 import Head from 'next/head';
-import Layout, { fullName } from '../components/layout';
+import Layout, { fullName, projectName } from '../components/layout';
 
 function Home() {
     return (
         <Layout home>
             <Head>
-                <title>{fullName}</title>
+                <title>
+                    {fullName}&apos;s personal website. | {projectName}
+                </title>
             </Head>
             <section className="h-screen">
                 <div />
