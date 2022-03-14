@@ -1,6 +1,10 @@
 function Sun() {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" className="fill-gray-900 h-fit w-6">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 50 50"
+            className="group-focus:scale-110 hover:scale-110 fill-gray-900 h-fit w-6"
+        >
             <circle cx="25" cy="25" r="12.23" />
             <path
                 d="M45,61.3a2.18,2.18,0,0,0-2.17,2.18v4.35a2.17,2.17,0,0,0,4.34,0V63.48A2.18,2.18,0,0,0,45,61.3Z"

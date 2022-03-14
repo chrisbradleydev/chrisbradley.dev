@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Theme, ThemeProvider } from '@@/contexts/theme-provider';
 import debounce from '@@/utils/debounce';
 import '@@/styles/globals.css';
+import '@@/styles/app.css';
 
 function App({ Component, pageProps }) {
     useEffect(() => {
