@@ -1,51 +1,48 @@
 {
-    "name": "chrisbradley.dev",
-    "description": "Chris Bradley's personal website",
-    "version": "1.0.0",
-    "engines": {
-        "node": ">=14",
-        "npm": ">=6"
-    },
-    "author": "Chris Bradley <contact@chrisbradley.dev> (https://chrisbradley.dev)",
-    "repository": "https://github.com/ctbradley/chrisbradley.dev",
-    "license": "ISC",
-    "scripts": {
-        "build": "next build",
-        "dev": "next dev",
-        "lint": "next lint",
-        "start": "next start"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "*.{js,jsx,ts,tsx}": "next lint --fix",
-        "*.{js,jsx,ts,tsx,md,html,css,scss}": "prettier --write"
-    },
-    "dependencies": {
-        "clsx": "^1.1.1",
-        "next": "^12.1.6",
-        "react": "^18.1.0",
-        "react-dom": "^18.1.0"
-    },
-    "devDependencies": {
-        "@tailwindcss/aspect-ratio": "^0.4.0",
-        "@tailwindcss/line-clamp": "^0.4.0",
-        "@tailwindcss/typography": "^0.5.2",
-        "autoprefixer": "^10.4.7",
-        "eslint": "^8.17.0",
-        "eslint-config-next": "^12.1.6",
-        "eslint-config-prettier": "^8.5.0",
-        "husky": "^8.0.1",
-        "lint-staged": "^13.0.0",
-        "postcss": "^8.4.14",
-        "prettier": "2.6.2",
-        "tailwindcss": "^3.0.24"
-    },
-    "browserslist": [
-        ">1%",
-        "not dead"
-    ]
+  "name": "chrisbradley.dev",
+  "description": "Chris Bradley's personal website",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=14",
+    "npm": ">=6"
+  },
+  "author": "Chris Bradley <contact@chrisbradley.dev> (https://chrisbradley.dev)",
+  "repository": "https://github.com/ctbradley/chrisbradley.dev",
+  "license": "ISC",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "next start"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "next lint --fix",
+    "*.{js,jsx,ts,tsx,md,html,css,scss}": "prettier --write"
+  },
+  "dependencies": {
+    "clsx": "^1.1.1",
+    "next": "^12.1.6",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/line-clamp": "^0.4.0",
+    "@tailwindcss/typography": "^0.5.2",
+    "autoprefixer": "^10.4.7",
+    "eslint": "^8.17.0",
+    "eslint-config-next": "^12.1.6",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.0",
+    "postcss": "^8.4.14",
+    "prettier": "2.6.2",
+    "tailwindcss": "^3.0.24"
+  }
 }
