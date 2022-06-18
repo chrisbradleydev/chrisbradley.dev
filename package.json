@@ -3,8 +3,8 @@
   "description": "Chris Bradley's personal website",
   "version": "1.0.0",
   "engines": {
-    "node": ">=14",
-    "npm": ">=6"
+    "node": ">=16",
+    "npm": ">=8"
   },
   "author": "Chris Bradley <contact@chrisbradley.dev> (https://chrisbradley.dev)",
   "repository": "https://github.com/ctbradley/chrisbradley.dev",
