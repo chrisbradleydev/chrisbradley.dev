@@ -3,7 +3,7 @@ import Layout, {projectName} from '../components/layout'
 
 function Home() {
   return (
-    <Layout home>
+    <Layout>
       <Head>
         <title>{projectName}</title>
       </Head>

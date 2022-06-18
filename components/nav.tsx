@@ -1,10 +1,10 @@
+import * as React from 'react'
 import {useRouter} from 'next/router'
-import PropTypes from 'prop-types'
 import Link from 'next/link'
 import clsx from 'clsx'
-import Logo from '../components/logo'
-import Moon from '../components/moon'
-import Sun from '../components/sun'
+import Logo from './logo'
+import Moon from './moon'
+import Sun from './sun'
 import {Theme, useTheme} from '../contexts/theme-provider'
 
 const navItems = [
@@ -16,11 +16,13 @@ const navItems = [
   {href: '/#', text: 'Seis'},
 ]
 
-function handleMouseOut(event) {
-  event.target.blur()
+function handleMouseOut(
+  event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>,
+) {
+  event.currentTarget.blur()
 }
 
-function NavItem({href, text}) {
+function NavItem({href, text}: {href: string; text: string}) {
   const {pathname} = useRouter()
   const active = href === pathname || pathname.startsWith(href)
   return (
@@ -40,11 +42,6 @@ function NavItem({href, text}) {
       </Link>
     </li>
   )
-}
-
-NavItem.propTypes = {
-  href: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
 }
 
 function Nav() {
