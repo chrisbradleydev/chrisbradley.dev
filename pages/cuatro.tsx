@@ -1,13 +1,13 @@
 import Layout from '../components/layout'
 
-function Home() {
+function Cuatro() {
   return (
     <>
-      <Layout pageName="Home">
+      <Layout pageName="Cuatro">
         <div />
       </Layout>
     </>
   )
 }
 
-export default Home
+export default Cuatro

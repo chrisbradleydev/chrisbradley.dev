@@ -1,13 +1,13 @@
 import Layout from '../components/layout'
 
-function Home() {
+function Uno() {
   return (
     <>
-      <Layout pageName="Home">
+      <Layout pageName="Uno">
         <div />
       </Layout>
     </>
   )
 }
 
-export default Home
+export default Uno

@@ -1,13 +1,13 @@
 import Layout from '../components/layout'
 
-function Home() {
+function Tres() {
   return (
     <>
-      <Layout pageName="Home">
+      <Layout pageName="Tres">
         <div />
       </Layout>
     </>
   )
 }
 
-export default Home
+export default Tres

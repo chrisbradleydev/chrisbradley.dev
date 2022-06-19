@@ -1,13 +1,13 @@
 import Layout from '../components/layout'
 
-function Home() {
+function Seis() {
   return (
     <>
-      <Layout pageName="Home">
+      <Layout pageName="Seis">
         <div />
       </Layout>
     </>
   )
 }
 
-export default Home
+export default Seis
