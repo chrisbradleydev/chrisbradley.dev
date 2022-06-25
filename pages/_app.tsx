@@ -40,8 +40,18 @@ function getBaseUrl() {
 }
 
 export default withTRPC<AppRouter>({
-  config() {
+  config({ctx}) {
     return {
+      headers() {
+        if (ctx?.req) {
+          // forward client headers to the server
+          return {
+            ...ctx.req.headers,
+            'x-ssr': '1',
+          }
+        }
+        return {}
+      },
       links: [
         loggerLink({
           enabled: options =>
@@ -56,7 +66,6 @@ export default withTRPC<AppRouter>({
       transformer: superjson,
     }
   },
-  ssr: true,
   responseMeta(options) {
     const context = options.ctx as SSRContext
     if (context.status) {
@@ -72,4 +81,5 @@ export default withTRPC<AppRouter>({
     }
     return {}
   },
+  ssr: true,
 })(App)
