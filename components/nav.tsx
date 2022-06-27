@@ -1,13 +1,13 @@
-import * as React from 'react'
-import {useRouter} from 'next/router'
-import Link from 'next/link'
-import clsx from 'clsx'
-import {MenuIcon, XIcon} from '@heroicons/react/outline'
 import {Disclosure} from '@headlessui/react'
+import {MenuIcon, XIcon} from '@heroicons/react/outline'
+import clsx from 'clsx'
+import Link from 'next/link'
+import {useRouter} from 'next/router'
+import * as React from 'react'
+import {Theme, useTheme} from '../contexts/theme-provider'
 import Logo from './logo'
 import Moon from './moon'
 import Sun from './sun'
-import {Theme, useTheme} from '../contexts/theme-provider'
 
 const navItems = [
   {name: 'Uno', href: '/uno'},

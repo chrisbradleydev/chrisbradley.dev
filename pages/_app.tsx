@@ -1,15 +1,15 @@
-import * as React from 'react'
-import type {AppProps} from 'next/app'
-import {withTRPC} from '@trpc/next'
-import {loggerLink} from '@trpc/client/links/loggerLink'
 import {httpBatchLink} from '@trpc/client/links/httpBatchLink'
+import {loggerLink} from '@trpc/client/links/loggerLink'
+import {withTRPC} from '@trpc/next'
+import type {AppProps} from 'next/app'
+import * as React from 'react'
 import superjson from 'superjson'
-import {AppRouter} from '../server/routers/_app'
 import {Theme, ThemeProvider} from '../contexts/theme-provider'
-import {SSRContext} from '../utils/trpc'
-import debounce from '../utils/debounce'
-import '../styles/globals.css'
+import {AppRouter} from '../server/routers/_app'
 import '../styles/app.css'
+import '../styles/globals.css'
+import debounce from '../utils/debounce'
+import {SSRContext} from '../utils/trpc'
 
 function App({Component, pageProps}: AppProps) {
   function handleScroll() {

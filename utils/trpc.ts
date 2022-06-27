@@ -1,6 +1,6 @@
-import {NextPageContext} from 'next'
 import {createReactQueryHooks} from '@trpc/react'
 import type {inferProcedureInput, inferProcedureOutput} from '@trpc/server'
+import {NextPageContext} from 'next'
 import type {AppRouter} from '../server/routers/_app'
 
 export interface SSRContext extends NextPageContext {

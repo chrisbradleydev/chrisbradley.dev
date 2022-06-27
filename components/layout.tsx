@@ -1,9 +1,9 @@
-import * as React from 'react'
 import Head from 'next/head'
+import * as React from 'react'
 import {useTheme} from '../contexts/theme-provider'
-import Nav from './nav'
-import Header from './header'
 import Footer from './footer'
+import Header from './header'
+import Nav from './nav'
 
 export const fullName = 'Chris Bradley'
 export const projectName = 'chrisbradleydev'
