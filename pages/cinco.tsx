@@ -2,11 +2,9 @@ import Layout from '../components/layout'
 
 function Cinco() {
   return (
-    <>
-      <Layout pageName="Cinco">
-        <div />
-      </Layout>
-    </>
+    <Layout pageName="Cinco">
+      <div />
+    </Layout>
   )
 }
 

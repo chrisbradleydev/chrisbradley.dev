@@ -2,11 +2,9 @@ import Layout from '../components/layout'
 
 function Cuatro() {
   return (
-    <>
-      <Layout pageName="Cuatro">
-        <div />
-      </Layout>
-    </>
+    <Layout pageName="Cuatro">
+      <div />
+    </Layout>
   )
 }
 
