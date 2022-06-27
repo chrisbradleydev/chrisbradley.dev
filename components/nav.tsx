@@ -36,7 +36,7 @@ const NextLink = React.forwardRef(
             active
               ? 'bg-pink-400 text-white'
               : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-            'block px-3 py-2 rounded-md text-base font-medium',
+            'block rounded-md px-3 py-2 text-base font-medium',
           )}
           aria-current={active ? 'page' : undefined}
           {...rest}
@@ -64,12 +64,12 @@ function Nav() {
     <Disclosure as="nav">
       {({open}) => (
         <>
-          <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16 px-4 sm:px-0">
+          <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div className="flex h-16 items-center justify-between px-4 sm:px-0">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <Link href="/">
-                    <a className="group focus:outline-none inline-block p-2">
+                    <a className="group inline-block p-2 focus:outline-none">
                       <Logo />
                     </a>
                   </Link>
@@ -85,9 +85,9 @@ function Nav() {
                         <a
                           href={item.href}
                           className={clsx(
-                            'block focus:outline-none dark:focus:text-pink-300 dark:hover:text-pink-300 focus:text-pink-400 hover:text-pink-400 text-lg underlined',
+                            'underlined block text-lg hover:text-pink-400 focus:text-pink-400 focus:outline-none dark:hover:text-pink-300 dark:focus:text-pink-300',
                             {
-                              'active dark:text-pink-300 text-pink-400': active,
+                              'active text-pink-400 dark:text-pink-300': active,
                             },
                           )}
                           aria-current={active ? 'page' : undefined}
@@ -99,11 +99,11 @@ function Nav() {
                   })}
                 </div>
               </div>
-              <div className="hidden md:flex items-center">
+              <div className="hidden items-center md:flex">
                 <div className="flex-shrink-0">
                   {/* Toggle theme button */}
                   <button
-                    className="group focus:outline-none inline-block p-2"
+                    className="group inline-block p-2 focus:outline-none"
                     onClick={handleClick}
                     onMouseOut={event => event.currentTarget.blur()}
                   >
@@ -114,7 +114,7 @@ function Nav() {
               </div>
               <div className="flex md:hidden">
                 {/* Mobile menu button */}
-                <Disclosure.Button className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -127,7 +127,7 @@ function Nav() {
           </div>
 
           <Disclosure.Panel className="px-2 py-2 md:hidden">
-            <div className="rounded-md space-y-1 sm:p-2">
+            <div className="space-y-1 rounded-md sm:p-2">
               {navItems.map(item => {
                 const active =
                   item.href === pathname || pathname.startsWith(item.href)

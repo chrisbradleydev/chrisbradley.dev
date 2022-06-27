@@ -31,11 +31,11 @@ function Layout({
         <title>{getTitle(pageName)}</title>
       </Head>
       <div className={theme ? theme : undefined}>
-        <div className="dark:bg-gray-900 flex flex-col dark:text-white text-gray-900">
+        <div className="flex flex-col text-gray-900 dark:bg-gray-900 dark:text-white">
           <Nav />
           <Header heading={pageName}>{hero}</Header>
           <main>
-            <div className="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
               <section className="h-screen">{children}</section>
             </div>
           </main>

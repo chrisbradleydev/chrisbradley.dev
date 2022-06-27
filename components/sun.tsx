@@ -3,7 +3,7 @@ function Sun() {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 50 50"
-      className="group-focus:scale-110 hover:scale-110 fill-gray-900 h-fit w-6"
+      className="h-fit w-6 fill-gray-900 hover:scale-110 group-focus:scale-110"
     >
       <circle cx="25" cy="25" r="12.23" />
       <path

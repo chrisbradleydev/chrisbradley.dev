@@ -9,7 +9,7 @@ function Header({
 }) {
   return (
     <header className="py-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {children ? (
           <>
             <h1 className="hidden">{heading}</h1>

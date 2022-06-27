@@ -3,7 +3,7 @@ function Logo() {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 512.49 396.49"
-      className="group-focus:scale-110 hover:scale-110 h-fit mt-1.5 w-8"
+      className="mt-1.5 h-fit w-8 hover:scale-110 group-focus:scale-110"
     >
       <path
         className="fill-pink-400 hover:fill-pink-300"
