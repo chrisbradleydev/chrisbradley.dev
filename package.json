@@ -33,7 +33,7 @@
   "dependencies": {
     "@headlessui/react": "^1.6.4",
     "@heroicons/react": "^1.0.6",
-    "@prisma/client": "^3.15.2",
+    "@prisma/client": "^4.0.0",
     "@trpc/client": "^9.25.3",
     "@trpc/next": "^9.25.3",
     "@trpc/react": "^9.25.3",
@@ -63,7 +63,7 @@
     "postcss": "^8.4.14",
     "prettier": "2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.11",
-    "prisma": "^3.15.2",
+    "prisma": "^4.0.0",
     "tailwindcss": "^3.0.24",
     "ts-node": "^10.8.1",
     "typescript": "4.7.4"
