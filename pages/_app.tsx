@@ -1,17 +1,18 @@
 import {httpBatchLink} from '@trpc/client/links/httpBatchLink'
 import {loggerLink} from '@trpc/client/links/loggerLink'
 import {withTRPC} from '@trpc/next'
+import {SessionProvider} from 'next-auth/react'
 import type {AppProps} from 'next/app'
 import * as React from 'react'
 import superjson from 'superjson'
 import {Theme, ThemeProvider} from '../contexts/theme-provider'
-import {AppRouter} from '../server/routers/_app'
+import {AppRouter} from '../server/router'
 import '../styles/app.css'
 import '../styles/globals.css'
 import debounce from '../utils/debounce'
 import {SSRContext} from '../utils/trpc'
 
-function App({Component, pageProps}: AppProps) {
+function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
   function handleScroll() {
     document.body.classList.toggle('scrolled', window.scrollY > 0)
   }
@@ -23,9 +24,11 @@ function App({Component, pageProps}: AppProps) {
   }, [])
 
   return (
-    <ThemeProvider specifiedTheme={Theme.DARK}>
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <SessionProvider session={session} refetchInterval={60 * 5}>
+      <ThemeProvider specifiedTheme={Theme.DARK}>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </SessionProvider>
   )
 }
 

@@ -2,12 +2,12 @@ import Layout from '../components/layout'
 import {trpc} from '../utils/trpc'
 
 function Home() {
-  const usersQuery = trpc.useQuery(['users'])
+  const usersQuery = trpc.useQuery(['user.getAll'])
   return (
     <Layout pageName="Home">
       <ul>
         {usersQuery.data?.map(user => (
-          <li key={user.id}>{`${user.first_name} ${user.last_name}`}</li>
+          <li key={user.id}>{user.name}</li>
         ))}
       </ul>
     </Layout>

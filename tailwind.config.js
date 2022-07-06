@@ -12,8 +12,9 @@ module.exports = {
       fontFamily: {
         sans: ['Fredoka', ...defaultTheme.fontFamily.sans],
       },
-      spacing: {
-        '5vw': '5vw',
+      screens: {
+        xs: '475px',
+        ...defaultTheme.screens,
       },
       typography: {
         DEFAULT: {

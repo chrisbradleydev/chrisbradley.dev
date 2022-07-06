@@ -1,13 +1,14 @@
-import {Disclosure} from '@headlessui/react'
+import {Disclosure, Menu, Transition} from '@headlessui/react'
 import {MenuIcon, XIcon} from '@heroicons/react/outline'
+import {MoonIcon, SunIcon, UserCircleIcon} from '@heroicons/react/solid'
 import clsx from 'clsx'
+import {useSession} from 'next-auth/react'
+import Image from 'next/future/image'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import * as React from 'react'
 import {Theme, useTheme} from '../contexts/theme-provider'
 import Logo from './logo'
-import Moon from './moon'
-import Sun from './sun'
 
 const navItems = [
   {name: 'Uno', href: '/uno'},
@@ -33,12 +34,9 @@ const NextLink = React.forwardRef(
         <a
           ref={ref}
           className={clsx(
-            active
-              ? 'bg-pink-400 text-white'
-              : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-            'block rounded-md px-3 py-2 text-base font-medium',
+            active ? 'bg-gray-100' : '',
+            'block px-4 py-2 text-sm text-gray-700',
           )}
-          aria-current={active ? 'page' : undefined}
           {...rest}
         >
           {children}
@@ -50,11 +48,129 @@ const NextLink = React.forwardRef(
 
 NextLink.displayName = 'NextLink'
 
-function Nav() {
-  const {pathname} = useRouter()
-  const [theme, setTheme] = useTheme()
+const NextPageLink = React.forwardRef(
+  (
+    props: {
+      active: boolean
+      children: string
+      href: string
+    },
+    ref: React.LegacyRef<HTMLAnchorElement>,
+  ) => {
+    const {active, children, href, ...rest} = props
+    return (
+      <Link href={href}>
+        <a
+          ref={ref}
+          className={clsx(
+            active
+              ? 'bg-pink-400 text-white'
+              : 'text-gray-900 hover:bg-gray-700 hover:text-white dark:text-gray-300',
+            'block rounded-md px-3 py-2 text-base font-medium shadow-sm',
+          )}
+          aria-current={active ? 'page' : undefined}
+          {...rest}
+        >
+          {children}
+        </a>
+      </Link>
+    )
+  },
+)
 
-  function handleClick() {
+NextPageLink.displayName = 'NextPageLink'
+
+const MenuButton = React.forwardRef(
+  (
+    props: {
+      children: React.ReactNode
+      onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+    },
+    ref: React.LegacyRef<HTMLButtonElement>,
+  ) => {
+    const {children, onClick, ...rest} = props
+    return (
+      <button
+        ref={ref}
+        onClick={onClick}
+        className="flex basis-1/2 justify-center rounded-md py-4 shadow-sm hover:bg-gray-700 sm:basis-1/4 [&_path]:hover:fill-white"
+        {...rest}
+      >
+        <div className="flex h-14 w-14 items-center">{children}</div>
+      </button>
+    )
+  },
+)
+
+MenuButton.displayName = 'MenuButton'
+
+function getProfileIcon({
+  circleSize = 8,
+  profileImage,
+  width = 32,
+  height = 32,
+}: {
+  circleSize?: number
+  profileImage: string
+  width?: number
+  height?: number
+}) {
+  if (profileImage) {
+    return (
+      <Image
+        className="rounded-full"
+        src={profileImage}
+        alt=""
+        width={width}
+        height={height}
+        priority={true}
+      />
+    )
+  }
+  return (
+    <div
+      className={clsx(
+        `h-${circleSize} w-${circleSize} flex items-center rounded-full`,
+        {
+          'hover:border-2 hover:border-gray-900 hover:bg-white [&_path]:hover:fill-gray-900':
+            circleSize === 8,
+        },
+      )}
+    >
+      <UserCircleIcon />
+    </div>
+  )
+}
+
+function getThemeIcon(theme: Theme, menuButton = false) {
+  return theme === Theme.DARK ? (
+    <MoonIcon
+      className={clsx({
+        '[&_path]:hover:fill-gray-900': !menuButton,
+      })}
+    />
+  ) : (
+    <SunIcon className="[&_path]:hover:fill-white" />
+  )
+}
+
+function Nav() {
+  const router = useRouter()
+  const [theme, setTheme] = useTheme()
+  const {data: session} = useSession()
+
+  const currentTheme = theme || Theme.DARK
+  const profileImage = session?.user?.image || ''
+
+  function handleLinkClick(
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    path: string,
+  ) {
+    event.preventDefault()
+    router.push(path)
+  }
+
+  function handleThemeClick() {
     setTheme(previousTheme =>
       previousTheme === Theme.DARK ? Theme.LIGHT : Theme.DARK,
     )
@@ -79,7 +195,8 @@ function Nav() {
                 <div className="flex items-baseline space-x-6">
                   {navItems.map(item => {
                     const active =
-                      item.href === pathname || pathname.startsWith(item.href)
+                      item.href === router.pathname ||
+                      router.pathname.startsWith(item.href)
                     return (
                       <Link key={item.name} href={item.href}>
                         <a
@@ -100,21 +217,72 @@ function Nav() {
                 </div>
               </div>
               <div className="hidden items-center md:flex">
-                <div className="flex-shrink-0">
-                  {/* Toggle theme button */}
-                  <button
-                    className="group inline-block p-2 focus:outline-none"
-                    onClick={handleClick}
-                    onMouseOut={event => event.currentTarget.blur()}
+                {/* Toggle theme button */}
+                <button
+                  className={clsx(
+                    'rounded-full focus:outline-none focus:ring-2',
+                    {
+                      'focus:ring-white focus:ring-offset-gray-900':
+                        theme === Theme.DARK,
+                      'focus:ring-gray-900 focus:ring-offset-white':
+                        theme === Theme.LIGHT,
+                    },
+                  )}
+                  onClick={handleThemeClick}
+                  onMouseOut={event => event.currentTarget.blur()}
+                >
+                  <span className="sr-only">Toggle theme</span>
+                  <div className="flex h-8 w-8 items-center rounded-full hover:bg-gray-900 dark:hover:bg-white">
+                    {getThemeIcon(currentTheme)}
+                  </div>
+                </button>
+                {/* Profile dropdown */}
+                <Menu as="div" className="relative ml-3">
+                  <Menu.Button
+                    className={clsx(
+                      'flex max-w-xs items-center rounded-full bg-gray-900 text-sm text-white focus:outline-none focus:ring-2',
+                      {
+                        'focus:ring-white focus:ring-offset-gray-900':
+                          theme === Theme.DARK,
+                        'focus:ring-gray-900 focus:ring-offset-white':
+                          theme === Theme.LIGHT,
+                      },
+                    )}
                   >
-                    <span className="sr-only">Toggle theme</span>
-                    {theme === Theme.DARK ? <Moon /> : <Sun />}
-                  </button>
-                </div>
+                    <span className="sr-only">Open user menu</span>
+                    {getProfileIcon({profileImage})}
+                  </Menu.Button>
+
+                  <Transition
+                    as={React.Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      {[
+                        ...(session
+                          ? [{name: 'Sign out', href: '/api/auth/signout'}]
+                          : [{name: 'Sign in', href: '/api/auth/signin'}]),
+                      ].map(item => (
+                        <Menu.Item key={item.name}>
+                          {({active}) => (
+                            <NextLink active={active} href={item.href}>
+                              {item.name}
+                            </NextLink>
+                          )}
+                        </Menu.Item>
+                      ))}
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
               </div>
               <div className="flex md:hidden">
                 {/* Mobile menu button */}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 shadow-sm hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-gray-900">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -130,15 +298,36 @@ function Nav() {
             <div className="space-y-1 rounded-md sm:p-2">
               {navItems.map(item => {
                 const active =
-                  item.href === pathname || pathname.startsWith(item.href)
+                  item.href === router.pathname ||
+                  router.pathname.startsWith(item.href)
                 return (
                   <Disclosure.Button key={item.name} as={React.Fragment}>
-                    <NextLink active={active} href={item.href}>
+                    <NextPageLink active={active} href={item.href}>
                       {item.name}
-                    </NextLink>
+                    </NextPageLink>
                   </Disclosure.Button>
                 )
               })}
+            </div>
+            <div className="mt-1 flex space-x-1">
+              <MenuButton onClick={handleThemeClick}>
+                {getThemeIcon(currentTheme, true)}
+              </MenuButton>
+              <MenuButton
+                onClick={event =>
+                  handleLinkClick(
+                    event,
+                    session ? '/api/auth/signout' : '/api/auth/signin',
+                  )
+                }
+              >
+                {getProfileIcon({
+                  circleSize: 14,
+                  profileImage,
+                  width: 64,
+                  height: 64,
+                })}
+              </MenuButton>
             </div>
           </Disclosure.Panel>
         </>

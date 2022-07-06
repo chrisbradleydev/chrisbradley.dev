@@ -1,7 +1,7 @@
 import {createReactQueryHooks} from '@trpc/react'
 import type {inferProcedureInput, inferProcedureOutput} from '@trpc/server'
 import {NextPageContext} from 'next'
-import type {AppRouter} from '../server/routers/_app'
+import type {AppRouter} from '../server/router'
 
 export interface SSRContext extends NextPageContext {
   status?: number
