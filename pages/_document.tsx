@@ -15,6 +15,13 @@ const links = [
     rel: 'preload',
     type: 'font/woff2',
   },
+  {
+    href: '/favicons/favicon-180x180.png',
+    rel: 'apple-touch-icon',
+    sizes: '180x180',
+    type: 'image/png',
+  },
+  {rel: 'manifest', href: '/app.webmanifest'},
 ]
 
 function Document() {
@@ -28,6 +35,7 @@ function Document() {
             crossOrigin={link.crossOrigin}
             href={link.href}
             rel={link.rel}
+            sizes={link.sizes}
             type={link.type}
           />
         ))}
