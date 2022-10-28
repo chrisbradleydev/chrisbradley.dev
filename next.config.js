@@ -8,11 +8,7 @@ const {env} = require('./server/env')
 const getConfig = config => config
 
 module.exports = getConfig({
-  experimental: {
-    images: {
-      allowFutureImage: true,
-    },
-  },
+  experimental: {},
   images: {
     domains: ['avatars.githubusercontent.com'],
   },

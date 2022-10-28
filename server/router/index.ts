@@ -1,10 +1,8 @@
-import superjson from 'superjson'
-import {createRouter} from './context'
-
+import {router} from '../trpc'
 import {userRouter} from './user'
 
-export const appRouter = createRouter()
-  .transformer(superjson)
-  .merge('user.', userRouter)
+export const appRouter = router({
+  user: userRouter,
+})
 
 export type AppRouter = typeof appRouter

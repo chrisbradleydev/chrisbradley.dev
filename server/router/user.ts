@@ -1,8 +1,8 @@
-import {prisma} from '../db/client'
-import {createRouter} from './context'
+import {prisma} from '../prisma'
+import {baseProcedure, router} from '../trpc'
 
-export const userRouter = createRouter().query('getAll', {
-  async resolve() {
+export const userRouter = router({
+  all: baseProcedure.query(async () => {
     return await prisma.user.findMany()
-  },
+  }),
 })
