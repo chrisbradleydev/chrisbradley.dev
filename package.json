@@ -40,13 +40,17 @@
     "@trpc/react": "^9.27.2",
     "@trpc/server": "^9.27.2",
     "clsx": "^1.2.1",
+    "gray-matter": "^4.0.3",
+    "mdx-bundler": "^9.0.1",
     "next": "12.2.5",
     "next-auth": "^4.10.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-query": "^3.39.2",
+    "reading-time": "^1.5.0",
     "sharp": "^0.30.7",
     "superjson": "^1.9.1",
+    "unified": "^10.1.2",
     "zod": "^3.18.0"
   },
   "devDependencies": {

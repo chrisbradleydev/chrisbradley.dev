@@ -17,11 +17,11 @@ function getTitle(pageName: string) {
 
 function Layout({
   children,
-  hero,
+  header = true,
   pageName,
 }: {
   children: React.ReactNode
-  hero?: React.ReactNode
+  header?: boolean
   pageName: string
 }) {
   const [theme] = useTheme()
@@ -33,7 +33,7 @@ function Layout({
       <div className={theme ? theme : undefined}>
         <div className="flex flex-col text-gray-900 dark:bg-gray-900 dark:text-white">
           <Nav />
-          <Header heading={pageName}>{hero}</Header>
+          {header ? <Header heading={pageName} /> : null}
           <main>
             <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
               <section className="h-screen">{children}</section>
