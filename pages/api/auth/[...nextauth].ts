@@ -1,8 +1,7 @@
 import {PrismaAdapter} from '@next-auth/prisma-adapter'
 import NextAuth, {NextAuthOptions} from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
-import {prisma} from '../../../server/db/client'
-import {Session} from '../../../utils/session'
+import {prisma} from '../../../server/prisma'
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -28,21 +27,9 @@ export const authOptions: NextAuthOptions = {
       return url.startsWith(baseUrl) ? url : baseUrl
     },
     async session({session, token, user}) {
-      const sess: Session = {
-        ...session,
-        user: {
-          ...session.user,
-          id: token.id as string,
-          role: token.role as string,
-        },
-      }
-      return sess
+      return session
     },
     async jwt({token, user, account, profile, isNewUser}) {
-      if (user) {
-        token.id = user.id
-        token.role = user.role
-      }
       return token
     },
   },

@@ -1,16 +1,15 @@
-import {httpBatchLink} from '@trpc/client/links/httpBatchLink'
-import {loggerLink} from '@trpc/client/links/loggerLink'
-import {withTRPC} from '@trpc/next'
 import {SessionProvider} from 'next-auth/react'
-import type {AppProps} from 'next/app'
+import type {AppProps as NextAppProps} from 'next/app'
 import * as React from 'react'
-import superjson from 'superjson'
 import {Theme, ThemeProvider} from '../contexts/theme-provider'
-import {AppRouter} from '../server/router'
 import '../styles/app.css'
 import '../styles/globals.css'
 import debounce from '../utils/debounce'
-import {SSRContext} from '../utils/trpc'
+import {trpc} from '../utils/trpc'
+
+type AppProps<P = any> = {
+  pageProps: P
+} & Omit<NextAppProps<P>, 'pageProps'>
 
 function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
   function handleScroll() {
@@ -32,57 +31,4 @@ function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
   )
 }
 
-function getBaseUrl() {
-  if (typeof window !== 'undefined') {
-    return ''
-  }
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`
-  }
-  return `http://localhost:${process.env.PORT ?? 3000}`
-}
-
-export default withTRPC<AppRouter>({
-  config({ctx}) {
-    return {
-      headers() {
-        if (ctx?.req) {
-          // forward client headers to the server
-          return {
-            ...ctx.req.headers,
-            'x-ssr': '1',
-          }
-        }
-        return {}
-      },
-      links: [
-        loggerLink({
-          enabled: options =>
-            process.env.NODE_ENV === 'development' ||
-            (options.direction === 'down' && options.result instanceof Error),
-        }),
-        httpBatchLink({
-          url: `${getBaseUrl()}/api/trpc`,
-          maxBatchSize: 10,
-        }),
-      ],
-      transformer: superjson,
-    }
-  },
-  responseMeta(options) {
-    const context = options.ctx as SSRContext
-    if (context.status) {
-      return {
-        status: context.status,
-      }
-    }
-    const error = options.clientErrors[0]
-    if (error) {
-      return {
-        status: error.data?.httpStatus ?? 500,
-      }
-    }
-    return {}
-  },
-  ssr: true,
-})(App)
+export default trpc.withTRPC(App)
