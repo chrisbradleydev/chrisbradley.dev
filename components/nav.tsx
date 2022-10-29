@@ -11,7 +11,7 @@ import {Theme, useTheme} from '../contexts/theme-provider'
 import Logo from './logo'
 
 const navItems = [
-  {name: 'Uno', href: '/uno'},
+  {name: 'Blog', href: '/blog'},
   {name: 'Dos', href: '/dos'},
   {name: 'Tres', href: '/tres'},
   {name: 'Cuatro', href: '/cuatro'},
