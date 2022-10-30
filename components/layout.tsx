@@ -1,12 +1,10 @@
 import Head from 'next/head'
 import * as React from 'react'
+import {projectName} from '../content/metadata'
 import {useTheme} from '../contexts/theme-provider'
 import Footer from './footer'
 import Header from './header'
 import Nav from './nav'
-
-export const fullName = 'Chris Bradley'
-export const projectName = 'chrisbradleydev'
 
 function getTitle(pageName: string) {
   if (pageName === 'Home') {
