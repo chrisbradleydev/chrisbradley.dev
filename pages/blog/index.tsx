@@ -1,9 +1,9 @@
 import type {GetStaticProps} from 'next'
 import Link from 'next/link'
-import Layout from '../components/layout'
-import {FrontmatterType, getAllFilesFrontmatter} from '../utils/mdx'
+import Layout from '../../components/layout'
+import {FrontmatterType, getAllFilesFrontmatter} from '../../utils/mdx'
 
-const Blog = ({posts}: {posts: FrontmatterType[]}) => {
+function Blog({posts}: {posts: FrontmatterType[]}) {
   return (
     <Layout pageName="Blog">
       <ul>
