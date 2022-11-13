@@ -95,7 +95,7 @@ export type FrontmatterType = {
   draft?: boolean
   slug: string
   summary?: string
-  tags?: string[]
+  tags: string[]
   title?: string
 }
 
@@ -115,6 +115,7 @@ export async function getAllFilesFrontmatter(folder: string) {
     const {data: frontmatter} = matter(source)
     if (frontmatter.draft !== true) {
       frontmatterArray.push({
+        tags: [],
         ...frontmatter,
         slug: formatSlug(fileName),
         date: new Date(frontmatter.date).toISOString(),

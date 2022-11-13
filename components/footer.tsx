@@ -51,14 +51,14 @@ const navItems = [
 
 function Footer() {
   return (
-    <footer className="bg-gray-900 text-white dark:bg-pink-400">
-      <div className="mx-auto max-w-7xl py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
+    <footer className="bg-gradient-to-b from-white to-neutral-300 dark:from-neutral-900 dark:to-neutral-800 dark:text-white">
+      <div className="mx-auto max-w-7xl py-16 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
         <div className="flex justify-center space-x-6 md:order-2">
           {navItems.map(item => (
             <a key={item.name} href={item.href} className="hover:text-gray-900">
               <span className="sr-only">{item.name}</span>
               <item.icon
-                className="h-6 w-6 [&_path]:hover:fill-pink-300 dark:[&_path]:hover:fill-gray-900"
+                className="h-6 w-6 [&_path]:hover:fill-pink-300"
                 aria-hidden="true"
               />
             </a>

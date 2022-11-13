@@ -12,7 +12,7 @@ import Logo from './logo'
 
 const navItems = [
   {name: 'Blog', href: '/blog'},
-  {name: 'Dos', href: '/dos'},
+  {name: 'Tags', href: '/tags'},
   {name: 'Tres', href: '/tres'},
   {name: 'Cuatro', href: '/cuatro'},
   {name: 'Cinco', href: '/cinco'},
