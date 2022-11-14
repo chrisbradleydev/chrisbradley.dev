@@ -34,9 +34,10 @@ function Layout({
           {header ? <Header heading={pageName} /> : null}
           <main>
             <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-              <section className="h-screen">{children}</section>
+              {children}
             </div>
           </main>
+          <div className="h-screen" />
           <Footer />
         </div>
       </div>

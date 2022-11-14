@@ -54,7 +54,9 @@ function PostCard({post}: {post: FrontmatterType}) {
                 <p className="text-xl font-semibold">
                   {post.title || 'Untitled'}
                 </p>
-                <p className="mt-3 text-base text-gray-500">{post.summary}</p>
+                <p className="mt-3 text-base text-neutral-500">
+                  {post.summary}
+                </p>
               </div>
             </div>
           </div>

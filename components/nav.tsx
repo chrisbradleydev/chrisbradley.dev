@@ -34,8 +34,8 @@ const NextLink = React.forwardRef(
         <a
           ref={ref}
           className={clsx(
-            active ? 'bg-gray-100' : '',
-            'block px-4 py-2 text-sm text-gray-700',
+            active ? 'bg-neutral-100' : '',
+            'block px-4 py-2 text-sm text-neutral-700',
           )}
           {...rest}
         >
@@ -65,7 +65,7 @@ const NextPageLink = React.forwardRef(
           className={clsx(
             active
               ? 'bg-pink-400 text-white'
-              : 'text-gray-900 hover:bg-gray-700 hover:text-white dark:text-gray-300',
+              : 'text-neutral-900 hover:bg-neutral-700 hover:text-white dark:text-neutral-300',
             'block rounded-md px-3 py-2 text-base font-medium shadow-sm',
           )}
           aria-current={active ? 'page' : undefined}
@@ -93,7 +93,7 @@ const MenuButton = React.forwardRef(
       <button
         ref={ref}
         onClick={onClick}
-        className="flex basis-1/2 justify-center rounded-md py-4 shadow-sm hover:bg-gray-700 sm:basis-1/4 [&_path]:hover:fill-white"
+        className="flex basis-1/2 justify-center rounded-md py-4 shadow-sm hover:bg-neutral-700 sm:basis-1/4 [&_path]:hover:fill-white"
         {...rest}
       >
         <div className="flex h-14 w-14 items-center">{children}</div>
@@ -132,7 +132,7 @@ function getProfileIcon({
       className={clsx(
         `h-${circleSize} w-${circleSize} flex items-center rounded-full`,
         {
-          'hover:border-2 hover:border-gray-900 hover:bg-white [&_path]:hover:fill-gray-900':
+          'hover:border-2 hover:border-neutral-900 hover:bg-white [&_path]:hover:fill-neutral-900':
             circleSize === 8,
         },
       )}
@@ -146,7 +146,7 @@ function getThemeIcon(theme: Theme, menuButton = false) {
   return theme === Theme.DARK ? (
     <MoonIcon
       className={clsx({
-        '[&_path]:hover:fill-gray-900': !menuButton,
+        '[&_path]:hover:fill-neutral-900': !menuButton,
       })}
     />
   ) : (
@@ -222,9 +222,9 @@ function Nav() {
                   className={clsx(
                     'rounded-full focus:outline-none focus:ring-2',
                     {
-                      'focus:ring-white focus:ring-offset-gray-900':
+                      'focus:ring-white focus:ring-offset-neutral-900':
                         theme === Theme.DARK,
-                      'focus:ring-gray-900 focus:ring-offset-white':
+                      'focus:ring-neutral-900 focus:ring-offset-white':
                         theme === Theme.LIGHT,
                     },
                   )}
@@ -232,7 +232,7 @@ function Nav() {
                   onMouseOut={event => event.currentTarget.blur()}
                 >
                   <span className="sr-only">Toggle theme</span>
-                  <div className="flex h-8 w-8 items-center rounded-full hover:bg-gray-900 dark:hover:bg-white">
+                  <div className="flex h-8 w-8 items-center rounded-full hover:bg-neutral-900 dark:hover:bg-white">
                     {getThemeIcon(currentTheme)}
                   </div>
                 </button>
@@ -240,11 +240,11 @@ function Nav() {
                 <Menu as="div" className="relative ml-3">
                   <Menu.Button
                     className={clsx(
-                      'flex max-w-xs items-center rounded-full bg-gray-900 text-sm text-white focus:outline-none focus:ring-2',
+                      'flex max-w-xs items-center rounded-full bg-neutral-900 text-sm text-white focus:outline-none focus:ring-2',
                       {
-                        'focus:ring-white focus:ring-offset-gray-900':
+                        'focus:ring-white focus:ring-offset-neutral-900':
                           theme === Theme.DARK,
-                        'focus:ring-gray-900 focus:ring-offset-white':
+                        'focus:ring-neutral-900 focus:ring-offset-white':
                           theme === Theme.LIGHT,
                       },
                     )}
@@ -282,7 +282,7 @@ function Nav() {
               </div>
               <div className="flex md:hidden">
                 {/* Mobile menu button */}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 shadow-sm hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-gray-900">
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 shadow-sm hover:bg-neutral-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-neutral-900">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XIcon className="block h-6 w-6" aria-hidden="true" />
