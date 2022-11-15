@@ -2,6 +2,7 @@ import Head from 'next/head'
 import * as React from 'react'
 import {projectName} from '../content/metadata'
 import {useTheme} from '../contexts/theme-provider'
+import Container from './container'
 import Footer from './footer'
 import Header from './header'
 import Nav from './nav'
@@ -33,9 +34,7 @@ function Layout({
           <Nav />
           {header ? <Header heading={pageName} /> : null}
           <main>
-            <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-              {children}
-            </div>
+            <Container>{children}</Container>
           </main>
           <div className="h-screen" />
           <Footer />

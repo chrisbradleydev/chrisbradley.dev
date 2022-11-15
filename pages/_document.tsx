@@ -26,7 +26,7 @@ const links = [
 
 function Document() {
   return (
-    <Html lang="en">
+    <Html className="h-full scroll-smooth antialiased" lang="en">
       <Head>
         {links.map(link => (
           <link
@@ -40,7 +40,7 @@ function Document() {
           />
         ))}
       </Head>
-      <body className="max-w-8xl mx-auto">
+      <body className="flex h-full flex-col">
         <Main />
         <NextScript />
       </body>

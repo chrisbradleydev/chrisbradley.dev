@@ -8,6 +8,7 @@ import Link from 'next/link'
 import {useRouter} from 'next/router'
 import * as React from 'react'
 import {Theme, useTheme} from '../contexts/theme-provider'
+import Container from './container'
 import Logo from './logo'
 
 const navItems = [
@@ -180,7 +181,7 @@ function Nav() {
     <Disclosure as="nav">
       {({open}) => (
         <>
-          <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <Container>
             <div className="flex h-16 items-center justify-between px-4 sm:px-0">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -292,7 +293,7 @@ function Nav() {
                 </Disclosure.Button>
               </div>
             </div>
-          </div>
+          </Container>
 
           <Disclosure.Panel className="px-2 py-2 md:hidden">
             <div className="space-y-1 rounded-md sm:p-2">
