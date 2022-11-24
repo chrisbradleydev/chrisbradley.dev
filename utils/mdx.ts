@@ -3,6 +3,7 @@ import matter from 'gray-matter'
 import {bundleMDX} from 'mdx-bundler'
 import path from 'path'
 import readingTime from 'reading-time'
+import remarkGfm from 'remark-gfm'
 import type * as U from 'unified'
 import getAllFilesRecursively from '../utils/files'
 
@@ -26,7 +27,7 @@ export function dateSortDesc(a: string, b: string) {
 }
 
 export async function getFileBySlug(type: string, slug: string) {
-  const remarkPlugins: U.PluggableList = []
+  const remarkPlugins: U.PluggableList = [remarkGfm]
   const rehypePlugins: U.PluggableList = []
   const mdxPath = path.join(root, 'content', type, `${slug}.mdx`)
   const mdPath = path.join(root, 'content', type, `${slug}.md`)
