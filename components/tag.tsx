@@ -10,14 +10,14 @@ const tagClasses: {[key: string]: string} = {
   typescript: 'bg-[#3178c6] text-white',
 }
 
-function Tag({tag, count}: {tag: string; count?: number}) {
+function Tag({count, tag}: {count?: number; tag: string}) {
   return (
     <Link href={`/tags/${tag}`} key={tag}>
-      <a className="text-g inline-block p-2">
+      <a className="m-2">
         <span
           className={clsx(
             tagClasses[tag],
-            'inline-flex items-center rounded px-2 py-0.5 text-sm font-medium',
+            'text-md inline-flex items-center rounded px-2.5 py-1 font-medium sm:px-2 sm:py-0.5 sm:text-sm',
           )}
         >
           #{tag}

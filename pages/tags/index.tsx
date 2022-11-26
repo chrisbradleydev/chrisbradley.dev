@@ -16,11 +16,15 @@ function Tags({tags}: {tags: TagsCount}) {
             To tag, or not to tag? That is the question.
           </p>
         </div>
-        <div className="mt-12">
-          {Object.keys(tags).length === 0 && 'No tags found.'}
-          {sortedTags.map(t => (
-            <Tag key={t} tag={t} count={tags[t]} />
-          ))}
+        <div className="mt-12 flow-root">
+          <div className="-m-2 flex flex-wrap">
+            {Object.keys(tags).length === 0 && (
+              <div className="m-2">No tags found.</div>
+            )}
+            {sortedTags.map(t => (
+              <Tag key={t} count={tags[t]} tag={t} />
+            ))}
+          </div>
         </div>
       </div>
     </Layout>
