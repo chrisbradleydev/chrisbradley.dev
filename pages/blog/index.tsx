@@ -24,7 +24,7 @@ function PostCard({post}: {post: FrontmatterType}) {
           flex-col
           justify-between
           bg-gradient-to-b
-          from-neutral-400
+          from-neutral-200
           dark:from-neutral-800
           dark:to-neutral-900"
         >
@@ -52,7 +52,7 @@ function PostCard({post}: {post: FrontmatterType}) {
           </div>
         </a>
       </Link>
-      <div className="px-4 pt-2 pb-4">
+      <div className="px-2 pt-2 pb-4">
         {post.tags?.map(tag => (
           <Tag key={tag} tag={tag} />
         ))}
