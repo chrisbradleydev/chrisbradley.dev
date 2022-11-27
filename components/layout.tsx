@@ -30,7 +30,15 @@ function Layout({
         <title>{getTitle(pageName)}</title>
       </Head>
       <div className={theme ? theme : undefined}>
-        <div className="flex flex-col bg-white dark:bg-neutral-900 dark:text-white">
+        <div
+          className="flex
+          flex-col
+          bg-white
+          transition
+          duration-500
+          dark:bg-neutral-900
+          dark:text-white"
+        >
           <Nav />
           {header ? <Header heading={pageName} /> : null}
           <main>
