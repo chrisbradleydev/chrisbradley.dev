@@ -182,7 +182,7 @@ function Nav() {
       {({open}) => (
         <>
           <Container>
-            <div className="flex h-16 items-center justify-between px-4 sm:px-0">
+            <div className="flex h-16 items-center justify-between md:px-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <Link href="/">
