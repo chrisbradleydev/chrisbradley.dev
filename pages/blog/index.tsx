@@ -1,5 +1,6 @@
 import type {GetStaticProps} from 'next'
 import Link from 'next/link'
+import Grid from '../../components/grid'
 import Layout from '../../components/layout'
 import Tag from '../../components/tag'
 import {FrontmatterType, getAllFilesFrontmatter} from '../../utils/mdx'
@@ -7,7 +8,9 @@ import {FrontmatterType, getAllFilesFrontmatter} from '../../utils/mdx'
 function PostCard({post}: {post: FrontmatterType}) {
   return (
     <article
-      className="flex
+      className="col-span-4
+      mb-10
+      flex
       flex-col
       overflow-hidden
       rounded-b-lg
@@ -76,11 +79,11 @@ function Blog({posts}: {posts: FrontmatterType[]}) {
               windows? Join me to tackle the tough questions.
             </p>
           </div>
-          <div className="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3">
-            {posts.map(post => (
-              <PostCard key={post.title} post={post} />
-            ))}
-          </div>
+          <Grid className="mt-12">
+            {posts.length
+              ? posts.map(post => <PostCard key={post.slug} post={post} />)
+              : null}
+          </Grid>
         </div>
       </div>
     </Layout>
