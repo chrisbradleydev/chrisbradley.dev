@@ -12,18 +12,16 @@ const tagClasses: {[key: string]: string} = {
 
 function Tag({count, tag}: {count?: number; tag: string}) {
   return (
-    <Link href={`/tags/${tag}`} key={tag}>
-      <a className="m-2">
-        <span
-          className={clsx(
-            tagClasses[tag],
-            'text-md inline-flex items-center rounded px-2.5 py-1 font-medium sm:px-2 sm:py-0.5 sm:text-sm',
-          )}
-        >
-          #{tag}
-          {count ? ` ${count}` : ''}
-        </span>
-      </a>
+    <Link href={`/tags/${tag}`} key={tag} className="m-2">
+      <span
+        className={clsx(
+          tagClasses[tag],
+          'text-md inline-flex items-center rounded px-2.5 py-1 font-medium sm:px-2 sm:py-0.5 sm:text-sm',
+        )}
+      >
+        #{tag}
+        {count ? ` ${count}` : ''}
+      </span>
     </Link>
   )
 }

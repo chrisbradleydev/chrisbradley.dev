@@ -3,7 +3,7 @@ import {MenuIcon, XIcon} from '@heroicons/react/outline'
 import {MoonIcon, SunIcon, UserCircleIcon} from '@heroicons/react/solid'
 import clsx from 'clsx'
 import {useSession} from 'next-auth/react'
-import Image from 'next/future/image'
+import Image from 'next/image'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import * as React from 'react'
@@ -19,67 +19,6 @@ const navItems = [
   {name: 'Cinco', href: '/cinco'},
   {name: 'Seis', href: '/seis'},
 ]
-
-const NextLink = React.forwardRef(
-  (
-    props: {
-      active: boolean
-      children: string
-      href: string
-    },
-    ref: React.LegacyRef<HTMLAnchorElement>,
-  ) => {
-    const {active, children, href, ...rest} = props
-    return (
-      <Link href={href}>
-        <a
-          ref={ref}
-          className={clsx(
-            active ? 'bg-neutral-100' : '',
-            'block px-4 py-2 text-sm text-neutral-700',
-          )}
-          {...rest}
-        >
-          {children}
-        </a>
-      </Link>
-    )
-  },
-)
-
-NextLink.displayName = 'NextLink'
-
-const NextPageLink = React.forwardRef(
-  (
-    props: {
-      active: boolean
-      children: string
-      href: string
-    },
-    ref: React.LegacyRef<HTMLAnchorElement>,
-  ) => {
-    const {active, children, href, ...rest} = props
-    return (
-      <Link href={href}>
-        <a
-          ref={ref}
-          className={clsx(
-            active
-              ? 'bg-pink-400 text-white'
-              : 'text-neutral-900 hover:bg-neutral-700 hover:text-white dark:text-neutral-300',
-            'block rounded-md px-3 py-2 text-base font-medium shadow-sm',
-          )}
-          aria-current={active ? 'page' : undefined}
-          {...rest}
-        >
-          {children}
-        </a>
-      </Link>
-    )
-  },
-)
-
-NextPageLink.displayName = 'NextPageLink'
 
 const MenuButton = React.forwardRef(
   (
@@ -185,10 +124,11 @@ function Nav() {
             <div className="flex h-16 items-center justify-between md:px-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Link href="/">
-                    <a className="group inline-block p-2 focus:outline-none">
-                      <Logo />
-                    </a>
+                  <Link
+                    href="/"
+                    className="group inline-block p-2 focus:outline-none"
+                  >
+                    <Logo />
                   </Link>
                 </div>
               </div>
@@ -199,19 +139,18 @@ function Nav() {
                       item.href === router.pathname ||
                       router.pathname.startsWith(item.href)
                     return (
-                      <Link key={item.name} href={item.href}>
-                        <a
-                          href={item.href}
-                          className={clsx(
-                            'underlined block text-lg hover:text-pink-400 focus:text-pink-400 focus:outline-none dark:hover:text-pink-300 dark:focus:text-pink-300',
-                            {
-                              'active text-pink-400 dark:text-pink-300': active,
-                            },
-                          )}
-                          aria-current={active ? 'page' : undefined}
-                        >
-                          {item.name}
-                        </a>
+                      <Link
+                        href={item.href}
+                        key={item.name}
+                        className={clsx(
+                          'underlined block text-lg hover:text-pink-400 focus:text-pink-400 focus:outline-none dark:hover:text-pink-300 dark:focus:text-pink-300',
+                          {
+                            'active text-pink-400 dark:text-pink-300': active,
+                          },
+                        )}
+                        aria-current={active ? 'page' : undefined}
+                      >
+                        {item.name}
                       </Link>
                     )
                   })}
@@ -271,9 +210,15 @@ function Nav() {
                       ].map(item => (
                         <Menu.Item key={item.name}>
                           {({active}) => (
-                            <NextLink active={active} href={item.href}>
+                            <Link
+                              href={item.href}
+                              className={clsx(
+                                active ? 'bg-neutral-100' : '',
+                                'block px-4 py-2 text-sm text-neutral-700',
+                              )}
+                            >
                               {item.name}
-                            </NextLink>
+                            </Link>
                           )}
                         </Menu.Item>
                       ))}
@@ -303,9 +248,18 @@ function Nav() {
                   router.pathname.startsWith(item.href)
                 return (
                   <Disclosure.Button key={item.name} as={React.Fragment}>
-                    <NextPageLink active={active} href={item.href}>
+                    <Link
+                      href={item.href}
+                      className={clsx(
+                        active
+                          ? 'bg-pink-400 text-white'
+                          : 'text-neutral-900 hover:bg-neutral-700 hover:text-white dark:text-neutral-300',
+                        'block rounded-md px-3 py-2 text-base font-medium shadow-sm',
+                      )}
+                      aria-current={active ? 'page' : undefined}
+                    >
                       {item.name}
-                    </NextPageLink>
+                    </Link>
                   </Disclosure.Button>
                 )
               })}

@@ -20,40 +20,37 @@ function PostCard({post}: {post: FrontmatterType}) {
       ease-in-out
       hover:scale-105"
     >
-      <Link href={`/blog/${post.slug}`}>
-        <a
-          className="flex
-          flex-1
-          flex-col
-          justify-between
-          bg-gradient-to-b
-          from-neutral-200
-          dark:from-neutral-800
-          dark:to-neutral-900"
-        >
-          <div className="h-28">
-            <svg viewBox="0 0 500 500" preserveAspectRatio="xMinYMin meet">
-              <path
-                className="fill-white dark:fill-neutral-900"
-                d="M0,100
-                C150,200
-                350,0
-                500,100
-                L500,00
-                L0,00
-                Z"
-              />
-            </svg>
+      <Link
+        href={`/blog/${post.slug}`}
+        className="flex
+        flex-1
+        flex-col
+        justify-between
+        bg-gradient-to-b
+        from-neutral-200
+        dark:from-neutral-800
+        dark:to-neutral-900"
+      >
+        <div className="h-28">
+          <svg viewBox="0 0 500 500" preserveAspectRatio="xMinYMin meet">
+            <path
+              className="fill-white dark:fill-neutral-900"
+              d="M0,100
+              C150,200
+              350,0
+              500,100
+              L500,00
+              L0,00
+              Z"
+            />
+          </svg>
+        </div>
+        <div className="grow">
+          <div className="mt-2 block px-6 py-8">
+            <p className="text-xl font-semibold">{post.title || 'Untitled'}</p>
+            <p className="mt-3 text-base text-neutral-500">{post.summary}</p>
           </div>
-          <div className="grow">
-            <div className="mt-2 block px-6 py-8">
-              <p className="text-xl font-semibold">
-                {post.title || 'Untitled'}
-              </p>
-              <p className="mt-3 text-base text-neutral-500">{post.summary}</p>
-            </div>
-          </div>
-        </a>
+        </div>
       </Link>
       <div className="px-2 pt-2 pb-4">
         {post.tags?.map(tag => (

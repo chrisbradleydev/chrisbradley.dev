@@ -1,11 +1,14 @@
+import {Fredoka} from '@next/font/google'
 import {SessionProvider} from 'next-auth/react'
 import type {AppProps as NextAppProps} from 'next/app'
 import * as React from 'react'
 import {Theme, ThemeProvider} from '../contexts/theme-provider'
 import '../styles/app.css'
-import '../styles/globals.css'
+import '../styles/tailwind.css'
 import debounce from '../utils/debounce'
 import {trpc} from '../utils/trpc'
+
+const fredoka = Fredoka({subsets: ['latin']})
 
 type AppProps<P = any> = {
   pageProps: P
@@ -25,7 +28,9 @@ function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
   return (
     <SessionProvider session={session} refetchInterval={60 * 5}>
       <ThemeProvider specifiedTheme={Theme.DARK}>
-        <Component {...pageProps} />
+        <div className={fredoka.className}>
+          <Component {...pageProps} />
+        </div>
       </ThemeProvider>
     </SessionProvider>
   )
