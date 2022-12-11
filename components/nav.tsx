@@ -2,7 +2,7 @@ import {Disclosure, Menu, Transition} from '@headlessui/react'
 import {MenuIcon, XIcon} from '@heroicons/react/outline'
 import {MoonIcon, SunIcon, UserCircleIcon} from '@heroicons/react/solid'
 import clsx from 'clsx'
-import {useSession} from 'next-auth/react'
+import {signIn, signOut, useSession} from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
@@ -97,18 +97,10 @@ function getThemeIcon(theme: Theme, menuButton = false) {
 function Nav() {
   const router = useRouter()
   const [theme, setTheme] = useTheme()
-  const {data: session} = useSession()
+  const {data: sessionData} = useSession()
 
   const currentTheme = theme || Theme.DARK
-  const profileImage = session?.user?.image || ''
-
-  function handleLinkClick(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    path: string,
-  ) {
-    event.preventDefault()
-    router.push(path)
-  }
+  const profileImage = sessionData?.user?.image || ''
 
   function handleThemeClick() {
     setTheme(previousTheme =>
@@ -204,7 +196,7 @@ function Nav() {
                   >
                     <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       {[
-                        ...(session
+                        ...(sessionData
                           ? [{name: 'Sign out', href: '/api/auth/signout'}]
                           : [{name: 'Sign in', href: '/api/auth/signin'}]),
                       ].map(item => (
@@ -269,12 +261,7 @@ function Nav() {
                 {getThemeIcon(currentTheme, true)}
               </MenuButton>
               <MenuButton
-                onClick={event =>
-                  handleLinkClick(
-                    event,
-                    session ? '/api/auth/signout' : '/api/auth/signin',
-                  )
-                }
+                onClick={sessionData ? () => signOut() : () => signIn()}
               >
                 {getProfileIcon({
                   circleSize: 14,
