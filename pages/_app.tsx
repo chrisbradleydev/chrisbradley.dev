@@ -1,4 +1,4 @@
-import {Fredoka} from '@next/font/google'
+import {Fredoka} from 'next/font/google'
 import {SessionProvider} from 'next-auth/react'
 import type {AppProps as NextAppProps} from 'next/app'
 import * as React from 'react'
