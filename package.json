@@ -2,8 +2,8 @@
   "name": "chrisbradley.dev",
   "version": "1.0.0",
   "engines": {
-    "node": "^18",
-    "npm": "^9"
+    "node": "^20",
+    "npm": "^10"
   },
   "description": "Chris Bradley's personal website",
   "author": "Chris Bradley <contact@chrisbradley.dev> (https://chrisbradley.dev)",
