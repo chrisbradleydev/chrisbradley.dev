@@ -74,6 +74,7 @@ canvas height: ${rect.height}`)
       const secondFontSize = Math.min(w / 640, h / 160)
       const fontUnit = 'rem'
       console.log(`headerFontSize: ${headerFontSize}
+secondFontSize: ${secondFontSize}
 fontUnit: ${fontUnit}`)
 
       // set font properties
