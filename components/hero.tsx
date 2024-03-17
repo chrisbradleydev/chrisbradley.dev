@@ -71,7 +71,7 @@ canvas height: ${rect.height}`)
 
       // calculate font size based on canvas size
       const headerFontSize = Math.min(w / 320, h / 80)
-      const secondFontSize = Math.min(w / 640, h / 160)
+      const secondFontSize = Math.min(w / 544, h / 136)
       const fontUnit = 'rem'
       console.log(`headerFontSize: ${headerFontSize}
 secondFontSize: ${secondFontSize}
