@@ -2,8 +2,8 @@ import type {GetStaticPaths, GetStaticProps} from 'next'
 import Layout from '../../components/layout'
 import {MDXLayoutRenderer} from '../../components/mdx'
 import {
-  formatSlug,
   FrontmatterType,
+  formatSlug,
   getFileBySlug,
   getFiles,
 } from '../../utils/mdx'

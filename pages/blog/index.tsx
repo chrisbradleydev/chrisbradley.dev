@@ -52,10 +52,8 @@ function PostCard({post}: {post: FrontmatterType}) {
           </div>
         </div>
       </Link>
-      <div className="px-2 pt-2 pb-4">
-        {post.tags?.map(tag => (
-          <Tag key={tag} tag={tag} />
-        ))}
+      <div className="px-2 pb-4 pt-2">
+        {post.tags?.map(tag => <Tag key={tag} tag={tag} />)}
       </div>
     </article>
   )
@@ -64,7 +62,7 @@ function PostCard({post}: {post: FrontmatterType}) {
 function Blog({posts}: {posts: FrontmatterType[]}) {
   return (
     <Layout pageName="Blog" header={false}>
-      <div className="relative px-4 pt-12 pb-20 sm:px-6 lg:px-8 lg:pt-24 lg:pb-28">
+      <div className="relative px-4 pb-20 pt-12 sm:px-6 lg:px-8 lg:pb-28 lg:pt-24">
         <div className="relative mx-auto max-w-7xl">
           <div className="text-center">
             <h1 className="text-lg font-semibold text-pink-300">Blog</h1>
