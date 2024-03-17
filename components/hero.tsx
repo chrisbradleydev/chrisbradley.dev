@@ -93,7 +93,7 @@ offsetY: ${offsetY}`)
       ctx.fillText(headerText.toUpperCase(), centerX, centerY - offsetY)
 
       ctx.font = `bold ${secondFontSize}${fontUnit} Fredoka`
-      ctx.fillStyle = 'white'
+      ctx.fillStyle = '#a3a3a3'
       ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
       ctx.fillText(secondText, centerX, centerY)
