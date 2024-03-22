@@ -10,6 +10,10 @@ h6 {
   text-wrap: balance;
 }
 
+p {
+  text-wrap: pretty;
+}
+
 .underlined {
   position: relative;
   text-decoration: none !important;
