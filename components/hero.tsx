@@ -43,23 +43,6 @@ const getCanvasRefs = (
   return [canvas, bufferCvs]
 }
 
-const getCanvasCtxs = (
-  can1: HTMLCanvasElement,
-  can2: HTMLCanvasElement,
-): CanvasRenderingContext2D[] => {
-  const ctx = can1.getContext('2d')
-  if (!ctx) {
-    console.log('no canvas context')
-    return []
-  }
-  const bufferCtx = can2.getContext('2d')
-  if (!bufferCtx) {
-    console.log('no buffer canvas context')
-    return []
-  }
-  return [ctx, bufferCtx]
-}
-
 const newParticle = (): Particle => ({
   x: 0,
   y: 0,
@@ -103,7 +86,9 @@ const Hero = () => {
     targetSpeed: number,
   ) => {
     const [canvas, bufferCvs] = getCanvasRefs(canvasRef, bufferCvsRef)
-    const [ctx, bufferCtx] = getCanvasCtxs(canvas, bufferCvs)
+    const ctx = canvas?.getContext('2d')
+    const bufferCtx = bufferCvs?.getContext('2d')
+    if (!ctx || !bufferCtx) return
 
     ctx.save()
     ctx.fillStyle = 'rgba(0, 0, 0, 0)'
@@ -187,7 +172,9 @@ const Hero = () => {
   React.useEffect(() => {
     const handleResize = () => {
       const [canvas, bufferCvs] = getCanvasRefs(canvasRef, bufferCvsRef)
-      const [ctx, bufferCtx] = getCanvasCtxs(canvas, bufferCvs)
+      const ctx = canvas?.getContext('2d')
+      const bufferCtx = bufferCvs?.getContext('2d')
+      if (!ctx || !bufferCtx) return
 
       canvas.width = screenWidth
       canvas.height = screenHeight
