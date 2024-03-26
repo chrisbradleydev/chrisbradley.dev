@@ -1,3 +1,4 @@
+import {SpeedInsights} from '@vercel/speed-insights/next'
 import Head from 'next/head'
 import * as React from 'react'
 import {projectName} from '../content/metadata'
@@ -47,6 +48,7 @@ function Layout({
           <div className="h-screen" />
           <Footer />
         </div>
+        <SpeedInsights />
       </div>
     </>
   )
