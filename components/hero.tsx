@@ -11,6 +11,7 @@ const FL = 500
 const DEFAULT_SPEED = 2
 const BOOST_SPEED = 300
 const FRAME_RATE = 1000 / 90 // 90fps
+const HALF_PI = Math.PI * 0.5
 
 type Particle = {
   x: number
@@ -119,11 +120,6 @@ const Hero = () => {
       a1: number,
       a2: number
 
-    let halfPi = Math.PI * 0.5
-    let atan2 = Math.atan2
-    let cos = Math.cos
-    let sin = Math.sin
-
     bufferCtx.beginPath()
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       p = particles[i]
@@ -151,13 +147,13 @@ const Hero = () => {
       py = cy + ry * pf
       pr = PARTICLE_RADIUS * pf
 
-      a = atan2(py - y, px - x)
-      a1 = a + halfPi
-      a2 = a - halfPi
+      a = Math.atan2(py - y, px - x)
+      a1 = a + HALF_PI
+      a2 = a - HALF_PI
 
-      bufferCtx.moveTo(px + pr * cos(a1), py + pr * sin(a1))
+      bufferCtx.moveTo(px + pr * Math.cos(a1), py + pr * Math.sin(a1))
       bufferCtx.arc(px, py, pr, a1, a2, true)
-      bufferCtx.lineTo(x + r * cos(a2), y + r * sin(a2))
+      bufferCtx.lineTo(x + r * Math.cos(a2), y + r * Math.sin(a2))
       bufferCtx.arc(x, y, r, a2, a1, true)
       bufferCtx.closePath()
     }
@@ -178,12 +174,10 @@ const Hero = () => {
 
       canvas.width = screenWidth
       canvas.height = screenHeight
-      centerX = canvas.width * 0.5
-      centerY = canvas.height * 0.5
       bufferCvs.width = screenWidth
       bufferCvs.height = screenHeight
-      centerX = bufferCvs.width * 0.5
-      centerY = bufferCvs.height * 0.5
+      centerX = canvas.width * 0.5
+      centerY = canvas.height * 0.5
 
       bufferCtx.fillStyle =
         theme === 'dark' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(0, 0, 0, 0.9)'
