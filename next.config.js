@@ -10,7 +10,12 @@ const getConfig = config => config
 module.exports = getConfig({
   experimental: {},
   images: {
-    domains: ['avatars.githubusercontent.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+      },
+    ],
   },
   poweredByHeader: false,
   publicRuntimeConfig: {
