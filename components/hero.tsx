@@ -10,7 +10,7 @@ const PARTICLE_RADIUS = 0.5
 const FL = 500
 const DEFAULT_SPEED = 2
 const BOOST_SPEED = 300
-const FRAME_RATE = 1000 / 60 // 60fps
+const FRAME_RATE = 1000 / 90 // 90fps
 
 type Particle = {
   x: number
