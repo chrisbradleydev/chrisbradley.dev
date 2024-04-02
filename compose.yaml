@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_INITDB_ARGS: "--encoding='UTF8' --lc-collate='C' --lc-ctype='C'"
+      POSTGRES_PASSWORD: ${POSTGRES_PASS}
+      POSTGRES_USER: ${POSTGRES_USER}
+      TZ: ${TZ}
+    ports:
+      - ${POSTGRES_PORT}:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          'CMD-SHELL',
+          "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'",
+        ]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    restart: always
+
+volumes:
+  postgres_data:

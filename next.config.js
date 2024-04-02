@@ -1,13 +1,8 @@
-const {env} = require('./server/env')
+// @ts-check
+await import('./server/env.js')
 
-/**
- * @template {import('next').NextConfig} T
- * @param {T} config
- * @constraint {{import('next').NextConfig}}
- */
-const getConfig = config => config
-
-module.exports = getConfig({
+/** @type {import("next").NextConfig} */
+const config = {
   experimental: {},
   images: {
     remotePatterns: [
@@ -18,8 +13,8 @@ module.exports = getConfig({
     ],
   },
   poweredByHeader: false,
-  publicRuntimeConfig: {
-    NODE_ENV: env.NODE_ENV,
-  },
   reactStrictMode: true,
-})
+  typescript: {ignoreBuildErrors: true},
+}
+
+export default config

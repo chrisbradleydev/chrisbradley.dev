@@ -3,16 +3,13 @@ import matter from 'gray-matter'
 import path from 'path'
 import {getFiles} from './mdx'
 
-export type TagsCount = {
-  [key: string]: number
-}
+export type TagsCount = Record<string, number>
 
 const root = process.cwd()
 
-export async function getAllTags(type: string) {
-  const files = await getFiles(type)
-
-  let tagsCount: TagsCount = {}
+export function getAllTags(type: string) {
+  const files = getFiles(type)
+  const tagsCount: TagsCount = {}
 
   files.forEach((file: string) => {
     const source = fs.readFileSync(

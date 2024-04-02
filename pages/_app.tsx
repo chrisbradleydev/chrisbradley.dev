@@ -10,6 +10,7 @@ import {trpc} from '../utils/trpc'
 
 const fredoka = Fredoka({subsets: ['latin']})
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AppProps<P = any> = {
   pageProps: P
 } & Omit<NextAppProps<P>, 'pageProps'>
@@ -26,6 +27,7 @@ function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
   }, [])
 
   return (
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     <SessionProvider session={session} refetchInterval={60 * 5}>
       <ThemeProvider specifiedTheme={Theme.DARK}>
         <div className={fredoka.className}>

@@ -31,8 +31,8 @@ function Tags({tags}: {tags: TagsCount}) {
   )
 }
 
-export async function getStaticProps() {
-  const tags = await getAllTags('posts')
+export function getStaticProps() {
+  const tags = getAllTags('posts')
   return {props: {tags}}
 }
 

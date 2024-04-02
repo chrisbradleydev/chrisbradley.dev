@@ -9,7 +9,7 @@ import getAllFilesRecursively from '../utils/files'
 
 const root = process.cwd()
 
-export function getFiles(type: string) {
+export function getFiles(type: string): string[] {
   const prefixPaths = path.join(root, 'content', type)
   const files = getAllFilesRecursively(prefixPaths)
   // only want to return blog/path and ignore root, replace is needed to work on windows
@@ -56,7 +56,7 @@ export async function getFileBySlug(type: string, slug: string) {
   try {
     const {code, frontmatter} = await bundleMDX({
       source,
-      mdxOptions(options, frontmatter) {
+      mdxOptions(options) {
         options.remarkPlugins = [
           ...(options.remarkPlugins ?? []),
           ...remarkPlugins,
@@ -83,7 +83,7 @@ export async function getFileBySlug(type: string, slug: string) {
         fileName: fs.existsSync(mdxPath) ? `${slug}.mdx` : `${slug}.md`,
         readingTime: readingTime(code),
         ...frontmatter,
-        date: new Date(frontmatter.date).toISOString(),
+        date: new Date(frontmatter.date as Date).toISOString(),
       },
     }
   } catch (error: unknown) {
@@ -91,7 +91,7 @@ export async function getFileBySlug(type: string, slug: string) {
   }
 }
 
-export type FrontmatterType = {
+export interface FrontmatterType {
   date: string
   draft?: boolean
   slug: string
@@ -100,7 +100,7 @@ export type FrontmatterType = {
   title?: string
 }
 
-export async function getAllFilesFrontmatter(folder: string) {
+export function getAllFilesFrontmatter(folder: string) {
   const prefixPaths = path.join(root, 'content', folder)
   const files = getAllFilesRecursively(prefixPaths)
   const frontmatterArray: FrontmatterType[] = []
@@ -119,7 +119,7 @@ export async function getAllFilesFrontmatter(folder: string) {
         tags: [],
         ...frontmatter,
         slug: formatSlug(fileName),
-        date: new Date(frontmatter.date).toISOString(),
+        date: new Date(frontmatter.date as Date).toISOString(),
       })
     }
   })

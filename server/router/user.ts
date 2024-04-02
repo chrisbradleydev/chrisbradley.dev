@@ -1,8 +1,11 @@
-import {prisma} from '../prisma'
-import {baseProcedure, router} from '../trpc'
+import {createTRPCRouter, publicProcedure} from '~/server/api/trpc'
+import {db} from '~/server/db'
+import {users} from '~/server/db/schema'
 
-export const userRouter = router({
-  all: baseProcedure.query(async () => {
-    return await prisma.user.findMany()
+import {z} from 'zod'
+
+export const userRouter = createTRPCRouter({
+  all: publicProcedure.input(z.object({})).query(async () => {
+    return db.select().from(users)
   }),
 })

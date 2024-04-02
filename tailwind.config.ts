@@ -1,7 +1,7 @@
-/** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme')
+import {type Config} from 'tailwindcss'
+import defaultTheme from 'tailwindcss/defaultTheme'
 
-module.exports = {
+export default {
   content: [
     './pages/**/*.{js,jsx,ts,tsx}',
     './components/**/*.{js,jsx,ts,tsx}',
@@ -36,4 +36,4 @@ module.exports = {
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/typography'),
   ],
-}
+} satisfies Config

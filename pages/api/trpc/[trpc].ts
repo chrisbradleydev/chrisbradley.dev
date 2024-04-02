@@ -1,14 +1,18 @@
-import * as trpcNext from '@trpc/server/adapters/next'
-import {createContext} from '../../../server/context'
-import {appRouter} from '../../../server/router'
+import {createNextApiHandler} from '@trpc/server/adapters/next'
+import {appRouter} from '~/server/api'
+import {createTRPCContext} from '~/server/api/trpc'
+import {env} from '~/server/env'
 
-export default trpcNext.createNextApiHandler({
+// export API handler
+export default createNextApiHandler({
   router: appRouter,
-  createContext,
-  onError({error}) {
-    if (error.code === 'INTERNAL_SERVER_ERROR') {
-      console.error(error)
-    }
-  },
-  batching: {enabled: true},
+  createContext: createTRPCContext,
+  onError:
+    env.NODE_ENV === 'development'
+      ? ({path, error}) => {
+          console.error(
+            `❌ tRPC failed on ${path ?? '<no-path>'}: ${error.message}`,
+          )
+        }
+      : undefined,
 })

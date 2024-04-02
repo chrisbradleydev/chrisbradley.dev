@@ -99,8 +99,8 @@ function Nav() {
   const [theme, setTheme] = useTheme()
   const {data: sessionData} = useSession()
 
-  const currentTheme = theme || Theme.DARK
-  const profileImage = sessionData?.user?.image || ''
+  const currentTheme = theme ?? Theme.DARK
+  const profileImage = sessionData?.user?.image ?? ''
 
   function handleThemeClick() {
     setTheme(previousTheme =>
@@ -261,7 +261,9 @@ function Nav() {
                 {getThemeIcon(currentTheme, true)}
               </MenuButton>
               <MenuButton
-                onClick={sessionData ? () => signOut() : () => signIn()}
+                onClick={
+                  sessionData ? () => void signOut() : () => void signIn()
+                }
               >
                 {getProfileIcon({
                   circleSize: 14,

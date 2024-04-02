@@ -5,7 +5,7 @@ enum Theme {
   LIGHT = 'light',
 }
 
-const themes: Array<Theme> = Object.values(Theme)
+const themes: Theme[] = Object.values(Theme)
 
 type ThemeContextType = [
   Theme | null,

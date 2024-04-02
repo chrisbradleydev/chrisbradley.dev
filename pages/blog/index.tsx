@@ -1,9 +1,9 @@
-import type {GetStaticProps} from 'next'
+import type { GetStaticProps } from 'next'
 import Link from 'next/link'
 import Grid from '../../components/grid'
 import Layout from '../../components/layout'
 import Tag from '../../components/tag'
-import {FrontmatterType, getAllFilesFrontmatter} from '../../utils/mdx'
+import { FrontmatterType, getAllFilesFrontmatter } from '../../utils/mdx'
 
 function PostCard({post}: {post: FrontmatterType}) {
   return (
@@ -47,7 +47,7 @@ function PostCard({post}: {post: FrontmatterType}) {
         </div>
         <div className="grow">
           <div className="mt-2 block px-6 py-8">
-            <p className="text-xl font-semibold">{post.title || 'Untitled'}</p>
+            <p className="text-xl font-semibold">{post.title ?? 'Untitled'}</p>
             <p className="mt-3 text-base text-neutral-500">{post.summary}</p>
           </div>
         </div>
@@ -85,8 +85,8 @@ function Blog({posts}: {posts: FrontmatterType[]}) {
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const posts = await getAllFilesFrontmatter('posts')
+export const getStaticProps: GetStaticProps = () => {
+  const posts = getAllFilesFrontmatter('posts')
   return {props: {posts}}
 }
 

@@ -3,7 +3,7 @@
  * Check out their work on CodePen here: https://codepen.io/akm2.
  */
 import * as React from 'react'
-import {useTheme} from '../contexts/theme-provider'
+import {Theme, useTheme} from '../contexts/theme-provider'
 
 const PARTICLE_COUNT = 200
 const PARTICLE_RADIUS = 0.5
@@ -13,7 +13,7 @@ const BOOST_SPEED = 300
 const FRAME_RATE = 1000 / 90 // 90fps
 const HALF_PI = Math.PI * 0.5
 
-type Particle = {
+interface Particle {
   x: number
   y: number
   z: number
@@ -57,6 +57,7 @@ const randomizeParticle = (
   bRef: React.RefObject<HTMLCanvasElement>,
 ): Particle => {
   const [canvas] = getCanvasRefs(cRef, bRef)
+  if (!canvas) return p
   p.x = Math.random() * canvas.width
   p.y = Math.random() * canvas.height
   p.z = Math.random() * 1500 + 500
@@ -87,6 +88,7 @@ const Hero = () => {
     targetSpeed: number,
   ) => {
     const [canvas, bufferCvs] = getCanvasRefs(canvasRef, bufferCvsRef)
+    if (!canvas || !bufferCvs) return
     const ctx = canvas?.getContext('2d')
     const bufferCtx = bufferCvs?.getContext('2d')
     if (!ctx || !bufferCtx) return
@@ -168,6 +170,7 @@ const Hero = () => {
   React.useEffect(() => {
     const handleResize = () => {
       const [canvas, bufferCvs] = getCanvasRefs(canvasRef, bufferCvsRef)
+      if (!canvas || !bufferCvs) return
       const ctx = canvas?.getContext('2d')
       const bufferCtx = bufferCvs?.getContext('2d')
       if (!ctx || !bufferCtx) return
@@ -180,7 +183,7 @@ const Hero = () => {
       centerY = canvas.height * 0.5
 
       bufferCtx.fillStyle =
-        theme === 'dark' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(0, 0, 0, 0.9)'
+        theme === Theme.DARK ? 'rgba(255, 255, 255, 0.9)' : 'rgba(0, 0, 0, 0.9)'
 
       ctx.drawImage(bufferCvs, 0, 0)
     }

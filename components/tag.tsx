@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import Link from 'next/link'
 
-const tagClasses: {[key: string]: string} = {
+const tagClasses: Record<string, string> = {
   docker: 'bg-[#2497ed] text-white',
   go: 'bg-[#00add8] text-white',
   javascript: 'bg-[#f7df1e] text-black',
