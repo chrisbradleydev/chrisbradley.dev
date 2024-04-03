@@ -1,5 +1,5 @@
+import {userRouter} from '~/server/api/routers/user'
 import {createCallerFactory, createTRPCRouter} from '~/server/api/trpc'
-import {userRouter} from '~/server/router/user'
 
 // primary router
 export const appRouter = createTRPCRouter({
