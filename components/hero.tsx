@@ -76,8 +76,8 @@ const Hero = () => {
   const [particles, setParticles] = React.useState<Particle[]>([])
   const [speed, setSpeed] = React.useState(DEFAULT_SPEED)
   const [targetSpeed, setTargetSpeed] = React.useState(DEFAULT_SPEED)
-  const [mouseX, setMouseX] = React.useState(0)
-  const [mouseY, setMouseY] = React.useState(0)
+  const [mouseX, setMouseX] = React.useState(screenWidth * 0.5)
+  const [mouseY, setMouseY] = React.useState(screenHeight * 0.5)
 
   const animate = (
     particles: Particle[],
@@ -105,8 +105,7 @@ const Hero = () => {
 
     setSpeed(speed + (targetSpeed - speed) * 0.01)
 
-    let p: Particle,
-      cx: number,
+    let cx: number,
       cy: number,
       rx: number,
       ry: number,
@@ -124,7 +123,8 @@ const Hero = () => {
 
     bufferCtx.beginPath()
     for (let i = 0; i < PARTICLE_COUNT; i++) {
-      p = particles[i]
+      const p = particles[i]
+      if (!p) return
 
       p.prevZ = p.z
       p.z -= speed
