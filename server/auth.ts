@@ -25,16 +25,16 @@ export const authOptions: NextAuthOptions = {
     colorScheme: 'dark',
   },
   callbacks: {
-    async signIn({user, account, profile, email, credentials}) {
+    signIn() {
       return true
     },
-    async redirect({url, baseUrl}) {
+    redirect({url, baseUrl}) {
       return url.startsWith(baseUrl) ? url : baseUrl
     },
-    async session({session, token, user}) {
+    session({session}) {
       return session
     },
-    async jwt({token, user, account, profile, isNewUser}) {
+    jwt({token}) {
       return token
     },
   },
