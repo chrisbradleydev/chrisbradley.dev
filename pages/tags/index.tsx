@@ -3,7 +3,10 @@ import Tag from '../../components/tag'
 import {getAllTags, TagsCount} from '../../utils/tags'
 
 function Tags({tags}: {tags: TagsCount}) {
-  const sortedTags = Object.keys(tags).sort((a, b) => tags[b] - tags[a])
+  const sortedTags = Object.keys(tags ?? {}).sort(
+    (a, b) => (tags[b] ?? 0) - (tags[a] ?? 0),
+  )
+
   return (
     <Layout pageName="Tags" header={false}>
       <div className="px-4 pb-20 pt-12 sm:px-6 lg:px-8 lg:pb-28 lg:pt-24">
