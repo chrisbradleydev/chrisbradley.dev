@@ -119,6 +119,7 @@ function Nav() {
                   <Link
                     href="/"
                     className="group inline-block p-2 focus:outline-none"
+                    aria-label="Homepage"
                   >
                     <Logo />
                   </Link>
