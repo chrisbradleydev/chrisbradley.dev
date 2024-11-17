@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {projectName} from '../content/metadata'
+import {projectName} from '~/content/metadata'
 import Container from './container'
 
 const navItems = [

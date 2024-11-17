@@ -1,9 +1,9 @@
-import type { GetStaticProps } from 'next'
+import type {GetStaticProps} from 'next'
 import Link from 'next/link'
-import Grid from '../../components/grid'
-import Layout from '../../components/layout'
-import Tag from '../../components/tag'
-import { FrontmatterType, getAllFilesFrontmatter } from '../../utils/mdx'
+import Grid from '~/components/grid'
+import Layout from '~/components/layout'
+import Tag from '~/components/tag'
+import {FrontmatterType, getAllFilesFrontmatter} from '~/utils/mdx'
 
 function PostCard({post}: {post: FrontmatterType}) {
   return (

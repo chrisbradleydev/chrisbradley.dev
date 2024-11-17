@@ -3,11 +3,11 @@ import {SessionProvider} from 'next-auth/react'
 import type {AppProps as NextAppProps} from 'next/app'
 import {Fredoka} from 'next/font/google'
 import * as React from 'react'
-import {Theme, ThemeProvider} from '../contexts/theme-provider'
-import '../styles/app.css'
-import '../styles/tailwind.css'
-import debounce from '../utils/debounce'
-import {trpc} from '../utils/trpc'
+import {Theme, ThemeProvider} from '~/contexts/theme-provider'
+import '~/styles/app.css'
+import '~/styles/tailwind.css'
+import debounce from '~/utils/debounce'
+import {trpc} from '~/utils/trpc'
 
 const fredoka = Fredoka({subsets: ['latin']})
 

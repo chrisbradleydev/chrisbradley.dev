@@ -5,7 +5,7 @@ import path from 'path'
 import readingTime from 'reading-time'
 import remarkGfm from 'remark-gfm'
 import type * as U from 'unified'
-import getAllFilesRecursively from '../utils/files'
+import getAllFilesRecursively from '~/utils/files'
 
 const root = process.cwd()
 

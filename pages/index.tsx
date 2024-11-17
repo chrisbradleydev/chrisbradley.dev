@@ -1,6 +1,6 @@
-import Hero from '../components/hero'
-import Layout from '../components/layout'
-import {trpc} from '../utils/trpc'
+import Hero from '~/components/hero'
+import Layout from '~/components/layout'
+import {trpc} from '~/utils/trpc'
 
 function Home() {
   const userQuery = trpc.user.all.useQuery({})

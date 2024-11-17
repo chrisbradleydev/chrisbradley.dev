@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import * as React from 'react'
-import {Theme, useTheme} from '../contexts/theme-provider'
+import {Theme, useTheme} from '~/contexts/theme-provider'
 import Container from './container'
 import Logo from './logo'
 

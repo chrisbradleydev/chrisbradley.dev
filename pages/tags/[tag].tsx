@@ -1,6 +1,6 @@
-import Layout from '../../components/layout';
-import { FrontmatterType, getAllFilesFrontmatter } from '../../utils/mdx';
-import { getAllTags } from '../../utils/tags';
+import Layout from '~/components/layout'
+import {FrontmatterType, getAllFilesFrontmatter} from '~/utils/mdx'
+import {getAllTags} from '~/utils/tags'
 
 function Tag({posts, tag}: {posts: FrontmatterType[]; tag: string}) {
   return (

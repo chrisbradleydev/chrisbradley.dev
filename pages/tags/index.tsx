@@ -1,6 +1,6 @@
-import Layout from '../../components/layout'
-import Tag from '../../components/tag'
-import {getAllTags, TagsCount} from '../../utils/tags'
+import Layout from '~/components/layout'
+import Tag from '~/components/tag'
+import {getAllTags, TagsCount} from '~/utils/tags'
 
 function Tags({tags}: {tags: TagsCount}) {
   const sortedTags = Object.keys(tags ?? {}).sort(
