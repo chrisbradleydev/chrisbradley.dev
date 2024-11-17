@@ -24,7 +24,7 @@ function Document() {
           />
         ))}
       </Head>
-      <body className="flex h-full flex-col">
+      <body className="flex h-full min-h-screen flex-col">
         <Main />
         <NextScript />
       </body>

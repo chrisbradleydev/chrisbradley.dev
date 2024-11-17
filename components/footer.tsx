@@ -52,7 +52,7 @@ const navItems = [
 
 function Footer() {
   return (
-    <footer className="bg-gradient-to-b from-white to-neutral-200 dark:from-neutral-900 dark:to-neutral-800 dark:text-white">
+    <footer className="mt-auto dark:text-white">
       <Container className="px-4 py-16 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
         <div className="flex justify-center space-x-6 md:order-2">
           {navItems.map(item => (
