@@ -240,7 +240,7 @@ const Layout = ({
         </div>
         <div
           ref={containerRef}
-          className="pointer-events-none absolute left-0 top-0 h-full w-full"
+          className="pointer-events-none absolute left-0 top-0 h-full w-full overflow-hidden"
         />
         <SpeedInsights />
       </div>
