@@ -1,3 +1,4 @@
+import type {Session} from 'next-auth'
 import {SessionProvider} from 'next-auth/react'
 import type {AppProps as NextAppProps} from 'next/app'
 import {Fredoka} from 'next/font/google'
@@ -10,10 +11,9 @@ import {trpc} from '../utils/trpc'
 
 const fredoka = Fredoka({subsets: ['latin']})
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type AppProps<P = any> = {
-  pageProps: P
-} & Omit<NextAppProps<P>, 'pageProps'>
+type AppProps = NextAppProps<{
+  session?: Session | null
+}>
 
 function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
   function handleScroll() {
@@ -27,7 +27,6 @@ function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
   }, [])
 
   return (
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     <SessionProvider session={session} refetchInterval={60 * 5}>
       <ThemeProvider specifiedTheme={Theme.DARK}>
         <div className={fredoka.className}>
