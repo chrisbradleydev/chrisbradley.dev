@@ -12,9 +12,11 @@ import Nav from './nav'
 
 const PARTICLE_COUNT = 200
 const PARTICLE_RADIUS = 2
-const FL = 600
+const FOCAL_LENGTH = 600
 const DEFAULT_SPEED = 2
 const BOOST_SPEED = 500
+const FRAME_RATE = 90
+const FRAME_INTERVAL = 1000 / FRAME_RATE
 
 interface Particle {
   x: number
@@ -79,7 +81,6 @@ const Layout = ({
   const frameIdRef = React.useRef<number>()
   const particlesRef = React.useRef<Particle[]>([])
 
-  // Convert state to refs
   const speedRef = React.useRef(DEFAULT_SPEED)
   const targetSpeedRef = React.useRef(DEFAULT_SPEED)
   const mouseXRef = React.useRef(0)
@@ -97,11 +98,16 @@ const Layout = ({
     const centerX = width * 0.5
     const centerY = height * 0.5
 
-    // Setup Three.js
+    // Center mouse position
+    mouseXRef.current = centerX
+    mouseYRef.current = centerY
+
+    // Create scene and camera
     const scene = new THREE.Scene()
     const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 2000)
-    camera.position.z = FL
+    camera.position.z = FOCAL_LENGTH
 
+    // Create renderer
     const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true})
     renderer.setSize(width, height)
     renderer.setPixelRatio(window.devicePixelRatio)
@@ -126,6 +132,7 @@ const Layout = ({
       return randomizeParticle(p, width, height)
     })
 
+    // Animation loop
     const animate = () => {
       if (!scene || !camera || !renderer) {
         return
@@ -142,12 +149,14 @@ const Layout = ({
           return
         }
 
+        // Calculate mouse offset
         const cx = centerX - (mouseXRef.current - centerX) * 1.25
         const cy = centerY - (mouseYRef.current - centerY) * 1.25
         const rx = p.x - cx
         const ry = p.y - cy
 
-        const f = FL / p.z
+        // Calculate perspective
+        const f = FOCAL_LENGTH / p.z
         const x = cx + rx * f
         const y = cy + ry * f
 
@@ -162,8 +171,11 @@ const Layout = ({
         ).needsUpdate = true
       })
 
+      // Render scene
       renderer.render(scene, camera)
-      frameIdRef.current = requestAnimationFrame(animate)
+      setTimeout(() => {
+        frameIdRef.current = requestAnimationFrame(animate)
+      }, FRAME_INTERVAL)
     }
 
     const handleMouseMove = (e: MouseEvent) => {
