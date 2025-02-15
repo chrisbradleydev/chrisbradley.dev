@@ -1,12 +1,12 @@
 import type {GetStaticPaths, GetStaticProps} from 'next'
 import Layout from '~/components/layout'
 import {MDXLayoutRenderer} from '~/components/mdx'
-import {FrontmatterType, formatSlug, getFileBySlug, getFiles} from '~/utils/mdx'
+import {FrontmatterPost, formatSlug, getFileBySlug, getFiles} from '~/utils/mdx'
 
 const Blog = ({
   post,
 }: {
-  post: {frontmatter: FrontmatterType; mdxSource: string}
+  post: {frontmatter: FrontmatterPost; mdxSource: string}
 }) => {
   return (
     <Layout header={false} pageName={post.frontmatter.title ?? 'Untitled'}>

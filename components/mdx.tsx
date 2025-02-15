@@ -1,7 +1,7 @@
 import {getMDXComponent} from 'mdx-bundler/client'
 import * as React from 'react'
 
-const BlogHeader = ({children}: {children: string}) => {
+const MDXHeader = ({children}: {children: string}) => {
   return (
     <div
       className="my-10
@@ -25,5 +25,5 @@ export const MDXLayoutRenderer = ({
   mdxSource: string
 }) => {
   const MDXLayout = React.useMemo(() => getMDXComponent(mdxSource), [mdxSource])
-  return <MDXLayout components={{BlogHeader}} {...rest} />
+  return <MDXLayout components={{MDXHeader}} {...rest} />
 }

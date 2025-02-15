@@ -3,9 +3,9 @@ import Link from 'next/link'
 import Grid from '~/components/grid'
 import Layout from '~/components/layout'
 import Tag from '~/components/tag'
-import {FrontmatterType, getAllFilesFrontmatter} from '~/utils/mdx'
+import {FrontmatterPost, getAllPosts} from '~/utils/mdx'
 
-function PostCard({post}: {post: FrontmatterType}) {
+function PostCard({post}: {post: FrontmatterPost}) {
   return (
     <article
       className="col-span-4
@@ -59,7 +59,7 @@ function PostCard({post}: {post: FrontmatterType}) {
   )
 }
 
-function Blog({posts}: {posts: FrontmatterType[]}) {
+function Blog({posts}: {posts: FrontmatterPost[]}) {
   return (
     <Layout pageName="Blog" header={false}>
       <div className="relative px-4 pb-20 pt-12 sm:px-6 lg:px-8 lg:pb-28 lg:pt-24">
@@ -86,7 +86,7 @@ function Blog({posts}: {posts: FrontmatterType[]}) {
 }
 
 export const getStaticProps: GetStaticProps = () => {
-  const posts = getAllFilesFrontmatter('posts')
+  const posts = getAllPosts()
   return {props: {posts}}
 }
 

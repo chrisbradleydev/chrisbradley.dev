@@ -35,7 +35,10 @@ function Tags({tags}: {tags: TagsCount}) {
 }
 
 export function getStaticProps() {
-  const tags = getAllTags('posts')
+  const tags: TagsCount = {
+    ...getAllTags('posts'),
+    ...getAllTags('quotes'),
+  }
   return {props: {tags}}
 }
 

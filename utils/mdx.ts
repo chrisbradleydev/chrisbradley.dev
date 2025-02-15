@@ -56,7 +56,10 @@ export async function getFileBySlug(type: string, slug: string) {
   try {
     const {code, frontmatter} = await bundleMDX({
       source,
-      mdxOptions(options) {
+      mdxOptions(options: {
+        remarkPlugins?: unknown[]
+        rehypePlugins?: unknown[]
+      }) {
         options.remarkPlugins = [
           ...(options.remarkPlugins ?? []),
           ...remarkPlugins,
@@ -83,7 +86,9 @@ export async function getFileBySlug(type: string, slug: string) {
         fileName: fs.existsSync(mdxPath) ? `${slug}.mdx` : `${slug}.md`,
         readingTime: readingTime(code),
         ...frontmatter,
-        date: new Date(frontmatter.date as Date).toISOString(),
+        date: frontmatter.date
+          ? new Date(frontmatter.date as Date).toISOString()
+          : '',
       },
     }
   } catch (error: unknown) {
@@ -91,7 +96,7 @@ export async function getFileBySlug(type: string, slug: string) {
   }
 }
 
-export interface FrontmatterType {
+export interface FrontmatterPost {
   date: string
   draft?: boolean
   slug: string
@@ -100,10 +105,19 @@ export interface FrontmatterType {
   title?: string
 }
 
-export function getAllFilesFrontmatter(folder: string) {
-  const prefixPaths = path.join(root, 'content', folder)
+export interface FrontmatterQuote {
+  date?: string
+  author: string
+  slug: string
+  quote: string
+  comment?: string
+  tags: string[]
+}
+
+export function getAllPosts() {
+  const prefixPaths = path.join(root, 'content/posts')
   const files = getAllFilesRecursively(prefixPaths)
-  const frontmatterArray: FrontmatterType[] = []
+  const posts: FrontmatterPost[] = []
 
   files.forEach((file: string) => {
     // replace is needed to work on windows
@@ -115,7 +129,7 @@ export function getAllFilesFrontmatter(folder: string) {
     const source = fs.readFileSync(file, 'utf8')
     const {data: frontmatter} = matter(source)
     if (frontmatter.draft !== true) {
-      frontmatterArray.push({
+      posts.push({
         tags: [],
         ...frontmatter,
         slug: formatSlug(fileName),
@@ -124,5 +138,32 @@ export function getAllFilesFrontmatter(folder: string) {
     }
   })
 
-  return frontmatterArray.sort((a, b) => dateSortDesc(a.date, b.date))
+  return posts.sort((a, b) => dateSortDesc(a.date, b.date))
+}
+
+export function getAllQuotes() {
+  const prefixPaths = path.join(root, 'content/quotes')
+  const files = getAllFilesRecursively(prefixPaths)
+  const quotes: FrontmatterQuote[] = []
+
+  files.forEach((file: string) => {
+    const fileName = file.slice(prefixPaths.length + 1).replace(/\\/g, '/')
+    if (path.extname(fileName) !== '.md' && path.extname(fileName) !== '.mdx') {
+      return
+    }
+    const source = fs.readFileSync(file, 'utf8')
+    const {data: frontmatter} = matter(source)
+    if (frontmatter.draft !== true) {
+      quotes.push({
+        tags: [],
+        ...frontmatter,
+        author: (frontmatter.author as string) ?? 'Unknown',
+        quote: (frontmatter.quote as string) ?? '',
+        comment: (frontmatter?.comment as string) ?? '',
+        slug: formatSlug(fileName),
+      } as FrontmatterQuote)
+    }
+  })
+
+  return quotes.sort((a, b) => dateSortDesc(b.author, a.author))
 }
