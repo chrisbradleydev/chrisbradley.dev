@@ -62,10 +62,35 @@ function QuoteCard({quote}: {quote: FrontmatterQuote}) {
   )
 }
 
-const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const alphabet = 'abcdefghijklmnopqrstuvwxyz'
 
 function Quotes({quotes}: {quotes: FrontmatterQuote[]}) {
   const [activeInitial, setActiveInitial] = React.useState<string | null>(null)
+
+  React.useEffect(() => {
+    const hash = window.location.hash.slice(1)
+    if (hash && alphabet.includes(hash)) {
+      setActiveInitial(hash)
+    }
+  }, [])
+
+  React.useEffect(() => {
+    if (activeInitial) {
+      window.location.hash = activeInitial
+    } else {
+      window.history.pushState(
+        '',
+        document.title,
+        window.location.pathname + window.location.search,
+      )
+    }
+  }, [activeInitial])
+
+  const handleLetterClick = (letter: string) => {
+    console.log(activeInitial, letter)
+    setActiveInitial(activeInitial === letter ? null : letter)
+  }
+
   return (
     <Layout pageName="Quotes" header={false}>
       <div className="relative px-4 pb-20 pt-12 sm:px-6 lg:px-8 lg:pb-28 lg:pt-24">
@@ -84,10 +109,12 @@ function Quotes({quotes}: {quotes: FrontmatterQuote[]}) {
               <span key={letter}>
                 <button
                   type="button"
-                  className="hover:text-pink-300"
-                  onClick={() => setActiveInitial(letter)}
+                  className={`hover:text-pink-300 ${
+                    activeInitial === letter ? 'text-pink-300' : ''
+                  }`}
+                  onClick={() => handleLetterClick(letter)}
                 >
-                  {letter}
+                  {letter.toUpperCase()}
                 </button>
                 {index < alphabet.length - 1 && (
                   <span className="mx-4 text-neutral-500 lg:mx-2">|</span>
@@ -99,9 +126,9 @@ function Quotes({quotes}: {quotes: FrontmatterQuote[]}) {
             {quotes.length
               ? quotes.map(
                   quote =>
-                    quote.author.startsWith(activeInitial ?? '') && (
-                      <QuoteCard key={quote.slug} quote={quote} />
-                    ),
+                    quote.author.startsWith(
+                      activeInitial?.toUpperCase() ?? '',
+                    ) && <QuoteCard key={quote.slug} quote={quote} />,
                 )
               : null}
           </Grid>
@@ -110,6 +137,7 @@ function Quotes({quotes}: {quotes: FrontmatterQuote[]}) {
     </Layout>
   )
 }
+
 export const getStaticProps: GetStaticProps = () => {
   const quotes = getAllQuotes()
   return {props: {quotes}}
