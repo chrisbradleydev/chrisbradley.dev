@@ -1,13 +1,6 @@
 import clsx from 'clsx'
 import Link from 'next/link'
 
-// Light Pink (#ffb6c1): - Hex: #ffb6c1
-// Baby Pink (#f4c2c2): - Hex: #f4c2c2
-// Blush Pink (#ffd1dc): - Hex: #ffd1dc
-// Rose Pink (#ff66cc): - Hex: #ff66cc
-// Cotton Candy Pink (#ffc0cb): - Hex: #ffc0cb
-// Mauve Pink (#e0b0ff): - Hex: #e0b0ff
-
 const tagClasses: Record<string, string> = {
   docker: 'bg-[#2497ed] text-white',
   go: 'bg-[#00add8] text-white',
