@@ -219,8 +219,15 @@ const Layout = ({
       // Cleanup particles
       particlesRef.current.forEach(p => {
         p.mesh.geometry.dispose()
+        // Dispose of particle material
+        if (p.mesh.material instanceof THREE.Material) {
+          p.mesh.material.dispose()
+        }
         scene.remove(p.mesh)
       })
+
+      // Dispose of the shared material
+      material.dispose()
 
       window.removeEventListener('resize', handleResize)
       document.removeEventListener('mousemove', handleMouseMove)
