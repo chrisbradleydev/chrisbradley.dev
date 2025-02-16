@@ -87,7 +87,6 @@ function Quotes({quotes}: {quotes: FrontmatterQuote[]}) {
   }, [activeInitial])
 
   const handleLetterClick = (letter: string) => {
-    console.log(activeInitial, letter)
     setActiveInitial(activeInitial === letter ? null : letter)
   }
 
