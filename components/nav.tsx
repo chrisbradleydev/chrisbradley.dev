@@ -1,6 +1,6 @@
 import {Disclosure, Menu, Transition} from '@headlessui/react'
-import {MenuIcon, XIcon} from '@heroicons/react/outline'
-import {MoonIcon, SunIcon, UserCircleIcon} from '@heroicons/react/solid'
+import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
+import {MoonIcon, SunIcon, UserCircleIcon} from '@heroicons/react/24/solid'
 import clsx from 'clsx'
 import {signIn, signOut, useSession} from 'next-auth/react'
 import Image from 'next/image'
@@ -224,9 +224,9 @@ function Nav() {
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 shadow-sm hover:bg-neutral-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-neutral-900">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
-                    <XIcon className="block h-6 w-6" aria-hidden="true" />
+                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                   ) : (
-                    <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                   )}
                 </Disclosure.Button>
               </div>

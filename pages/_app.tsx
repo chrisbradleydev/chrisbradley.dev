@@ -1,6 +1,6 @@
 import type {Session} from 'next-auth'
 import {SessionProvider} from 'next-auth/react'
-import type {AppProps as NextAppProps} from 'next/app'
+import {type AppType} from 'next/app'
 import {Fredoka} from 'next/font/google'
 import * as React from 'react'
 import {Theme, ThemeProvider} from '~/contexts/theme-provider'
@@ -11,11 +11,10 @@ import {trpc} from '~/utils/trpc'
 
 const fredoka = Fredoka({subsets: ['latin']})
 
-type AppProps = NextAppProps<{
-  session?: Session | null
-}>
-
-function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
+const App: AppType<{session: Session | null}> = ({
+  Component,
+  pageProps: {session, ...pageProps},
+}) => {
   function handleScroll() {
     document.body.classList.toggle('scrolled', window.scrollY > 0)
   }

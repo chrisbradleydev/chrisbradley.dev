@@ -1,8 +1,8 @@
 import {httpBatchLink, loggerLink} from '@trpc/client'
 import {createTRPCNext} from '@trpc/next'
-import type {inferRouterInputs, inferRouterOutputs} from '@trpc/server'
+import {type inferRouterInputs, type inferRouterOutputs} from '@trpc/server'
+import superjson from 'superjson'
 import type {AppRouter} from '~/server/api'
-import {transformer} from './transformer'
 
 function getBaseUrl() {
   if (typeof window !== 'undefined') {
@@ -16,7 +16,7 @@ function getBaseUrl() {
 
 // https://trpc.io/docs/v11/react#3-create-trpc-hooks
 export const trpc = createTRPCNext<AppRouter>({
-  config({ctx}) {
+  config() {
     return {
       // https://trpc.io/docs/v11/client/links
       links: [
@@ -26,15 +26,9 @@ export const trpc = createTRPCNext<AppRouter>({
             (opts.direction === 'down' && opts.result instanceof Error),
         }),
         httpBatchLink({
+          // https://trpc.io/docs/data-transformers
+          transformer: superjson,
           url: `${getBaseUrl()}/api/trpc`,
-          headers() {
-            if (!ctx?.req?.headers) {
-              return {}
-            }
-            const {connection: _connection, ...headers} = ctx.req.headers
-            return headers
-          },
-          transformer,
         }),
       ],
       // https://tanstack.com/query/v5/docs/reference/QueryClient
@@ -44,7 +38,7 @@ export const trpc = createTRPCNext<AppRouter>({
   // https://trpc.io/docs/v11/ssr
   ssr: false,
   // https://trpc.io/docs/v11/data-transformers
-  transformer,
+  transformer: superjson,
 })
 
 // inference helper for inputs

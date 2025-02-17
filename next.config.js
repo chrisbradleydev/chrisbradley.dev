@@ -1,5 +1,5 @@
 // @ts-check
-await import('./server/env.js')
+import './env.js'
 
 /** @type {import("next").NextConfig} */
 const config = {

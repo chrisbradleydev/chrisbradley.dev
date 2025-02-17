@@ -248,7 +248,7 @@ const Layout = ({
       <Head>
         <title>{getTitle(pageName)}</title>
       </Head>
-      <div className={clsx(theme ? theme : undefined, 'relative')}>
+      <div className={clsx(theme ?? 'relative')}>
         <div className="flex min-h-screen flex-col bg-white transition duration-500 dark:bg-neutral-900 dark:text-white">
           <Nav />
           {header ? <Header heading={pageName} /> : null}
