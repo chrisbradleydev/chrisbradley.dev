@@ -5,32 +5,14 @@ import Grid from '~/components/grid'
 import Layout from '~/components/layout'
 import Tag from '~/components/tag'
 import {FrontmatterQuote, getAllQuotes} from '~/utils/mdx'
+import {stringToRomanNumeral} from '~/utils/numbers'
 
 function QuoteCard({quote}: {quote: FrontmatterQuote}) {
   return (
-    <article
-      className="col-span-4
-      mb-10
-      flex
-      flex-col
-      overflow-hidden
-      rounded-b-lg
-      shadow-md
-      transition-transform
-      duration-500
-      ease-in-out
-      hover:scale-105"
-    >
+    <article className="col-span-4 mb-10 flex flex-col overflow-hidden rounded-b-lg shadow-md transition-transform duration-500 ease-in-out hover:scale-105">
       <Link
         href={`/quotes/${quote.slug}`}
-        className="flex
-        flex-1
-        flex-col
-        justify-between
-        bg-gradient-to-b
-        from-neutral-200
-        dark:from-neutral-800
-        dark:to-neutral-900"
+        className="flex flex-1 flex-col justify-between bg-gradient-to-b from-neutral-200 dark:from-neutral-800 dark:to-neutral-900"
       >
         <div className="h-28">
           <svg viewBox="0 0 500 500" preserveAspectRatio="xMinYMin meet">
@@ -48,7 +30,10 @@ function QuoteCard({quote}: {quote: FrontmatterQuote}) {
         </div>
         <div className="grow">
           <div className="mt-2 block px-6 py-8">
-            <p className="text-xl font-semibold">{quote.author ?? 'Unknown'}</p>
+            <p className="text-xl font-semibold">
+              {quote.author ?? 'Unknown'}
+              {stringToRomanNumeral(quote.slug)}
+            </p>
             <p className="text-xl font-semibold">
               &quot;{quote.quote ?? ''}&quot;
             </p>
