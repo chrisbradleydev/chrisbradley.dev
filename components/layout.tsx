@@ -1,10 +1,10 @@
-import {SpeedInsights} from '@vercel/speed-insights/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import clsx from 'clsx'
 import Head from 'next/head'
 import * as React from 'react'
 import * as THREE from 'three'
-import {projectName} from '~/content/metadata'
-import {Theme, useTheme} from '~/contexts/theme-provider'
+import { projectName } from '~/content/metadata'
+import { Theme, useTheme } from '~/contexts/theme-provider'
 import Container from './container'
 import Footer from './footer'
 import Header from './header'
@@ -78,7 +78,7 @@ const Layout = ({
   const rendererRef = React.useRef<THREE.WebGLRenderer | null>(null)
   const sceneRef = React.useRef<THREE.Scene | null>(null)
   const cameraRef = React.useRef<THREE.PerspectiveCamera | null>(null)
-  const frameIdRef = React.useRef<number>()
+  const frameIdRef = React.useRef<number>(0)
   const particlesRef = React.useRef<Particle[]>([])
 
   const speedRef = React.useRef(DEFAULT_SPEED)
