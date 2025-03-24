@@ -17,7 +17,9 @@
     "build": "next build",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "dev": "next dev",
+    "dev": "next dev --turbo",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,html,css}\" --cache",
+    "format:write": "prettier --write \"**/*.{js,jsx,ts,tsx,html,css}\" --cache",
     "lint": "next lint",
     "start": "next start"
   },
@@ -28,7 +30,7 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": "next lint --fix",
-    "**/*.{js,jsx,ts,tsx,md,html,css,scss}": "prettier --write"
+    "**/*.{js,jsx,ts,tsx,html,css}": "prettier --write"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.7.4",

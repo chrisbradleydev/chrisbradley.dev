@@ -3,8 +3,8 @@ import Layout from '~/components/layout'
 // import {trpc} from '~/utils/trpc'
 
 function Home() {
-//   const userQuery = trpc.user.all.useQuery({})
-//   const users = userQuery.data?.length ? userQuery.data : []
+  // const userQuery = trpc.user.all.useQuery({})
+  // const users = userQuery.data?.length ? userQuery.data : []
 
   return (
     <Layout pageName="Home" header={false}>
