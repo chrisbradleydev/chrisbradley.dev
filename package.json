@@ -33,7 +33,7 @@
     "**/*.{js,jsx,ts,tsx,html,css}": "prettier --write"
   },
   "dependencies": {
-    "@auth/drizzle-adapter": "^1.7.4",
+    "@auth/drizzle-adapter": "^1.8.0",
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
     "@t3-oss/env-nextjs": "^0.12.0",
@@ -45,7 +45,7 @@
     "@vercel/postgres": "^0.10.0",
     "@vercel/speed-insights": "^1.2.0",
     "clsx": "^2.1.1",
-    "drizzle-orm": "^0.39.3",
+    "drizzle-orm": "^0.41.0",
     "gray-matter": "^4.0.3",
     "mdx-bundler": "^10.1.0",
     "next": "^15.2.3",
@@ -73,7 +73,7 @@
     "@typescript-eslint/eslint-plugin": "^8.24.1",
     "@typescript-eslint/parser": "^8.24.1",
     "autoprefixer": "^10.4.20",
-    "drizzle-kit": "^0.30.4",
+    "drizzle-kit": "^0.30.5",
     "eslint": "^8.57.1",
     "eslint-config-next": "^15.1.7",
     "eslint-config-prettier": "^10.0.1",
