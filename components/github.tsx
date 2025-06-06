@@ -1,4 +1,5 @@
 import * as React from 'react'
+import buildQueryParams from '~/utils/queryParams'
 import Container from './container'
 
 interface GitHubRepo {
@@ -41,8 +42,16 @@ function GitHub() {
         setLoading(true)
 
         // Fetch user's repositories
+        // https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28
         const reposResponse = await fetch(
-          'https://api.github.com/users/chrisbradleydev/repos?sort=updated&per_page=10',
+          `https://api.github.com/users/chrisbradleydev/repos${buildQueryParams(
+            {
+              type: 'public',
+              sort: 'updated',
+              direction: 'desc',
+              per_page: '10',
+            },
+          )}`,
         )
 
         if (!reposResponse.ok) {
@@ -51,8 +60,10 @@ function GitHub() {
 
         const reposData = (await reposResponse.json()) as GitHubRepo[]
 
-        // Get the 3 most recently updated repositories
-        const recentRepos = reposData.slice(0, 3)
+        // Get the 6 most recently updated repositories filtering some
+        const recentRepos = reposData
+          .filter(r => !r.name.startsWith('hello-'))
+          .slice(0, 6)
 
         setRepos(recentRepos)
 
