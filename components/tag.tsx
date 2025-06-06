@@ -2,18 +2,18 @@ import clsx from 'clsx'
 import Link from 'next/link'
 
 const tagClasses: Record<string, string> = {
-  docker: 'bg-[#2497ed] text-white',
-  go: 'bg-[#00add8] text-white',
-  javascript: 'bg-[#f7df1e] text-black',
-  node: 'bg-[#44883e] text-white',
-  react: 'bg-[#222] text-[#00d8ff]',
-  typescript: 'bg-[#3178c6] text-white',
-  philosophy: 'bg-[#ffdfb6] text-black',
-  politics: 'bg-[#ff7f50] text-white',
-  programming: 'bg-[#ff3344] text-black',
-  business: 'bg-[#fffff0] text-black',
-  religion: 'bg-[#6a5acd] text-white',
-  science: 'bg-[#f9a8d4] text-black',
+  business: 'bg-business text-[#1a1a1a]',
+  docker: 'bg-docker text-[#fafafa]',
+  go: 'bg-go text-[#fff]',
+  javascript: 'bg-javascript text-[#000]',
+  node: 'bg-node text-[#f0f0f0]',
+  philosophy: 'bg-philosophy text-[#000]',
+  politics: 'bg-politics text-[#fff]',
+  programming: 'bg-programming text-[#171717]',
+  react: 'bg-react text-[#00d8ff]',
+  religion: 'bg-religion text=[#fafafa]',
+  science: 'bg-science text-[#1a1a1a]',
+  typescript: 'bg-typescript text-[#f5f5f5]',
 }
 
 function Tag({count, tag}: {count?: number; tag: string}) {
