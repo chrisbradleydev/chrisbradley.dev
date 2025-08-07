@@ -1,5 +1,4 @@
 import * as React from 'react'
-import buildQueryParams from '~/utils/queryParams'
 import Container from './container'
 
 interface GitHubRepo {
@@ -17,19 +16,18 @@ interface GitHubRepo {
   default_branch: string
 }
 
-interface GitHubCommit {
-  sha: string
-  commit: {
-    message: string
-    author: {
-      name: string
-      date: string
-    }
-  }
+interface RepoWithCommits extends GitHubRepo {
+  commit_count: number
+}
+
+interface GitHubActivityResponse {
+  repos: RepoWithCommits[]
+  commit_counts: Record<string, number>
+  last_updated: string
 }
 
 function GitHub() {
-  const [repos, setRepos] = React.useState<GitHubRepo[]>([])
+  const [repos, setRepos] = React.useState<RepoWithCommits[]>([])
   const [commitCounts, setCommitCounts] = React.useState<
     Record<string, number>
   >({})
@@ -41,59 +39,19 @@ function GitHub() {
       try {
         setLoading(true)
 
-        // Fetch user's repositories
-        // https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28
-        const reposResponse = await fetch(
-          `https://api.github.com/users/chrisbradleydev/repos${buildQueryParams(
-            {
-              type: 'public',
-              sort: 'updated',
-              direction: 'desc',
-              per_page: '10',
-            },
-          )}`,
+        // Fetch data from the static JSON file served by GitHub Pages
+        const response = await fetch(
+          'https://raw.githubusercontent.com/chrisbradleydev/chrisbradley.dev/main/content/github/activity.json',
         )
 
-        if (!reposResponse.ok) {
-          throw new Error('Failed to fetch repositories')
+        if (!response.ok) {
+          throw new Error('Failed to fetch GitHub activity data')
         }
 
-        const reposData = (await reposResponse.json()) as GitHubRepo[]
+        const data = (await response.json()) as GitHubActivityResponse
 
-        // Get the 6 most recently updated repositories filtering some
-        const recentRepos = reposData
-          .filter(r => !r.name.startsWith('hello-'))
-          .slice(0, 6)
-
-        setRepos(recentRepos)
-
-        // Fetch commit counts for each repository
-        const commitCountPromises = recentRepos.map(async repo => {
-          try {
-            const commitsResponse = await fetch(
-              `https://api.github.com/repos/${repo.full_name}/commits?per_page=100`,
-            )
-
-            if (commitsResponse.ok) {
-              const commits = (await commitsResponse.json()) as GitHubCommit[]
-              return {repoName: repo.name, count: commits.length}
-            }
-            return {repoName: repo.name, count: 0}
-          } catch {
-            return {repoName: repo.name, count: 0}
-          }
-        })
-
-        const commitData = await Promise.all(commitCountPromises)
-        const commitCountMap = commitData.reduce(
-          (acc, {repoName, count}) => {
-            acc[repoName] = count
-            return acc
-          },
-          {} as Record<string, number>,
-        )
-
-        setCommitCounts(commitCountMap)
+        setRepos(data.repos)
+        setCommitCounts(data.commit_counts)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred')
       } finally {
@@ -238,7 +196,8 @@ function GitHub() {
 
         <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {repos.map(repo => {
-            const commitCount = commitCounts[repo.name] ?? 0
+            const commitCount =
+              repo.commit_count ?? commitCounts[repo.name] ?? 0
             const style = getCommitBasedStyle(commitCount)
 
             return (
