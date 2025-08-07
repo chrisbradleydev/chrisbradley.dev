@@ -34,28 +34,6 @@ function GitHub({activity}: {activity: GitHubActivityResponse}) {
   const [loading] = React.useState(false)
   const [error] = React.useState<string | null>(null)
 
-  const randomLargePrefix = (): string => {
-    const arr = [
-      'Brobdingnagian',
-      'Colossal',
-      'Enormo',
-      'Giant',
-      'Gigantic',
-      'Hyper',
-      'Macro',
-      'Mammoth',
-      'Max',
-      'Mega',
-      'Seismic',
-      'Super',
-      'Supra',
-      'Titan',
-      'Ultra',
-      'Vast',
-    ]
-    return arr[Math.floor(Math.random() * arr.length)] ?? 'WTF'
-  }
-
   const getLanguageColor = (language: string | null) => {
     const colors: Record<string, string> = {
       'C#': 'bg-cs',
@@ -111,11 +89,7 @@ function GitHub({activity}: {activity: GitHubActivityResponse}) {
   }
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    })
+    return new Date(dateString).toUTCString()
   }
 
   if (loading) {
@@ -182,8 +156,7 @@ function GitHub({activity}: {activity: GitHubActivityResponse}) {
                 <div
                   className={`absolute -right-3 -top-3 rounded-full px-3 py-1 text-xs font-bold ${style.badge}`}
                 >
-                  {commitCount >= 100 ? randomLargePrefix() : commitCount}{' '}
-                  commits
+                  {commitCount} commits
                 </div>
 
                 {/* Repository Header */}
