@@ -20,47 +20,19 @@ interface RepoWithCommits extends GitHubRepo {
   commit_count: number
 }
 
-interface GitHubActivityResponse {
+export interface GitHubActivityResponse {
   repos: RepoWithCommits[]
   commit_counts: Record<string, number>
   last_updated: string
 }
 
-function GitHub() {
-  const [repos, setRepos] = React.useState<RepoWithCommits[]>([])
-  const [commitCounts, setCommitCounts] = React.useState<
-    Record<string, number>
-  >({})
-  const [loading, setLoading] = React.useState(true)
-  const [error, setError] = React.useState<string | null>(null)
-
-  React.useEffect(() => {
-    const fetchGitHubData = async () => {
-      try {
-        setLoading(true)
-
-        // Fetch data from the static JSON file served by GitHub Pages
-        const response = await fetch(
-          'https://raw.githubusercontent.com/chrisbradleydev/chrisbradley.dev/main/content/github/activity.json',
-        )
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch GitHub activity data')
-        }
-
-        const data = (await response.json()) as GitHubActivityResponse
-
-        setRepos(data.repos)
-        setCommitCounts(data.commit_counts)
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred')
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    void fetchGitHubData()
-  }, [])
+function GitHub({activity}: {activity: GitHubActivityResponse}) {
+  const [repos] = React.useState<RepoWithCommits[]>(activity?.repos || [])
+  const [commitCounts] = React.useState<Record<string, number>>(
+    activity?.commit_counts || 0,
+  )
+  const [loading] = React.useState(false)
+  const [error] = React.useState<string | null>(null)
 
   const randomLargePrefix = (): string => {
     const arr = [
