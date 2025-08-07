@@ -46,13 +46,14 @@ function GitHub({activity}: {activity: GitHubActivityResponse}) {
       'Mammoth',
       'Max',
       'Mega',
+      'Seismic',
       'Super',
       'Supra',
       'Titan',
       'Ultra',
       'Vast',
     ]
-    return arr[Math.floor(Math.random() * arr.length)] ?? 'Seismic'
+    return arr[Math.floor(Math.random() * arr.length)] ?? 'WTF'
   }
 
   const getLanguageColor = (language: string | null) => {
