@@ -1,5 +1,7 @@
+'use client'
+
 import {getMDXComponent} from 'mdx-bundler/client'
-import * as React from 'react'
+import {useMemo} from 'react'
 
 const MDXHeader = ({children}: {children: string}) => {
   return (
@@ -31,14 +33,16 @@ const QuoteBody = ({children}: {children: string}) => {
   )
 }
 
+const mdxComponents = {MDXHeader, QuoteHeader, QuoteBody}
+
+/* eslint-disable react-hooks/static-components -- getMDXComponent from mdx-bundler requires creating component at runtime */
 export const MDXLayoutRenderer = ({
   mdxSource,
   ...rest
 }: {
   mdxSource: string
 }) => {
-  const MDXLayout = React.useMemo(() => getMDXComponent(mdxSource), [mdxSource])
-  return (
-    <MDXLayout components={{MDXHeader, QuoteHeader, QuoteBody}} {...rest} />
-  )
+  const MDXLayout = useMemo(() => getMDXComponent(mdxSource), [mdxSource])
+  return <MDXLayout components={mdxComponents} {...rest} />
 }
+/* eslint-enable react-hooks/static-components */

@@ -91,7 +91,8 @@ export async function getFileBySlug(type: string, slug: string) {
           : '',
       },
     }
-  } catch (error: unknown) {
+  } catch (error) {
+    console.error('Error bundling MDX:', error)
     throw error
   }
 }
