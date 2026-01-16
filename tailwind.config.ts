@@ -1,7 +1,4 @@
-import aspectRatio from '@tailwindcss/aspect-ratio'
-import typography from '@tailwindcss/typography'
 import {type Config} from 'tailwindcss'
-import defaultTheme from 'tailwindcss/defaultTheme'
 
 export default {
   content: [
@@ -40,27 +37,12 @@ export default {
         typescript: '#3178c6',
       },
       fontFamily: {
-        sans: ['Fredoka', ...defaultTheme.fontFamily.sans],
+        sans: ['Fredoka'],
       },
       screens: {
         xs: '475px',
-        ...defaultTheme.screens,
-      },
-      typography: {
-        DEFAULT: {
-          css: [],
-        },
-        dark: {
-          css: [],
-        },
-        light: {
-          css: [],
-        },
       },
     },
   },
-  variants: {
-    backgroundColor: ['responsive', 'hover', 'focus', 'active'],
-  },
-  plugins: [aspectRatio, typography],
+  plugins: [],
 } satisfies Config

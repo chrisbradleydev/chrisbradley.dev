@@ -1,4 +1,13 @@
-import {Disclosure, Menu, Transition} from '@headlessui/react'
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  Transition,
+} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
 import {MoonIcon, SunIcon, UserCircleIcon} from '@heroicons/react/24/solid'
 import clsx from 'clsx'
@@ -20,20 +29,20 @@ const navItems = [
   {name: 'Seis', href: '/seis'},
 ]
 
-const MenuButton = React.forwardRef(
+const CustomMenuButton = React.forwardRef(
   (
     props: {
       children: React.ReactNode
       onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
     },
-    ref: React.LegacyRef<HTMLButtonElement>,
+    ref: React.Ref<HTMLButtonElement>,
   ) => {
     const {children, onClick, ...rest} = props
     return (
       <button
         ref={ref}
         onClick={onClick}
-        className="flex basis-1/2 justify-center rounded-md py-4 shadow-sm hover:bg-neutral-700 sm:basis-1/4 [&_path]:hover:fill-white"
+        className="flex basis-1/2 cursor-pointer justify-center rounded-md py-4 shadow-sm hover:bg-neutral-700 sm:basis-1/4 hover:[&_path]:fill-white"
         {...rest}
       >
         <div className="flex h-14 w-14 items-center">{children}</div>
@@ -42,7 +51,7 @@ const MenuButton = React.forwardRef(
   },
 )
 
-MenuButton.displayName = 'MenuButton'
+CustomMenuButton.displayName = 'CustomMenuButton'
 
 function getProfileIcon({
   circleSize = 8,
@@ -58,7 +67,7 @@ function getProfileIcon({
   if (profileImage) {
     return (
       <Image
-        className="rounded-full"
+        className="cursor-pointer rounded-full"
         src={profileImage}
         alt=""
         width={width}
@@ -70,9 +79,9 @@ function getProfileIcon({
   return (
     <div
       className={clsx(
-        `h-${circleSize} w-${circleSize} flex items-center rounded-full`,
+        `h-${circleSize} w-${circleSize} flex cursor-pointer items-center rounded-full`,
         {
-          'hover:border-2 hover:border-neutral-900 hover:bg-white [&_path]:hover:fill-neutral-900':
+          'hover:border-2 hover:border-neutral-900 hover:bg-white hover:[&_path]:fill-neutral-900':
             circleSize === 8,
         },
       )}
@@ -86,11 +95,11 @@ function getThemeIcon(theme: Theme, menuButton = false) {
   return theme === Theme.DARK ? (
     <MoonIcon
       className={clsx({
-        '[&_path]:hover:fill-neutral-900': !menuButton,
+        'hover:[&_path]:fill-neutral-900': !menuButton,
       })}
     />
   ) : (
-    <SunIcon className="[&_path]:hover:fill-white" />
+    <SunIcon className="hover:[&_path]:fill-white" />
   )
 }
 
@@ -115,7 +124,7 @@ function Nav() {
           <Container>
             <div className="flex h-16 items-center justify-between md:px-4">
               <div className="flex items-center">
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <Link
                     href="/"
                     className="group inline-block p-2 focus:outline-none"
@@ -153,7 +162,7 @@ function Nav() {
                 {/* Toggle theme button */}
                 <button
                   className={clsx(
-                    'rounded-full focus:outline-none focus:ring-2',
+                    'rounded-full focus:ring-2 focus:outline-none',
                     {
                       'focus:ring-white focus:ring-offset-neutral-900':
                         theme === Theme.DARK,
@@ -165,15 +174,15 @@ function Nav() {
                   onMouseOut={event => event.currentTarget.blur()}
                 >
                   <span className="sr-only">Toggle theme</span>
-                  <div className="flex h-8 w-8 items-center rounded-full hover:bg-neutral-900 dark:hover:bg-white">
+                  <div className="flex h-8 w-8 cursor-pointer items-center rounded-full hover:bg-neutral-900 dark:hover:bg-white">
                     {getThemeIcon(currentTheme)}
                   </div>
                 </button>
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
-                  <Menu.Button
+                  <MenuButton
                     className={clsx(
-                      'flex max-w-xs items-center rounded-full bg-neutral-900 text-sm text-white focus:outline-none focus:ring-2',
+                      'flex max-w-xs items-center rounded-full bg-neutral-900 text-sm text-white focus:ring-2 focus:outline-none',
                       {
                         'focus:ring-white focus:ring-offset-neutral-900':
                           theme === Theme.DARK,
@@ -184,7 +193,7 @@ function Nav() {
                   >
                     <span className="sr-only">Open user menu</span>
                     {getProfileIcon({profileImage})}
-                  </Menu.Button>
+                  </MenuButton>
 
                   <Transition
                     as={React.Fragment}
@@ -195,52 +204,52 @@ function Nav() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <MenuItems className="ring-opacity-5 absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black focus:outline-none">
                       {[
                         ...(sessionData
                           ? [{name: 'Sign out', href: '/api/auth/signout'}]
                           : [{name: 'Sign in', href: '/api/auth/signin'}]),
                       ].map(item => (
-                        <Menu.Item key={item.name}>
-                          {({active}) => (
+                        <MenuItem key={item.name}>
+                          {({focus}) => (
                             <Link
                               href={item.href}
                               className={clsx(
-                                active ? 'bg-neutral-100' : '',
+                                focus ? 'bg-neutral-100' : '',
                                 'block px-4 py-2 text-sm text-neutral-700',
                               )}
                             >
                               {item.name}
                             </Link>
                           )}
-                        </Menu.Item>
+                        </MenuItem>
                       ))}
-                    </Menu.Items>
+                    </MenuItems>
                   </Transition>
                 </Menu>
               </div>
               <div className="flex md:hidden">
                 {/* Mobile menu button */}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 shadow-sm hover:bg-neutral-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-neutral-900">
+                <DisclosureButton className="inline-flex cursor-pointer items-center justify-center rounded-md p-2 shadow-sm hover:bg-neutral-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-neutral-900 focus:outline-none">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                   ) : (
                     <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                   )}
-                </Disclosure.Button>
+                </DisclosureButton>
               </div>
             </div>
           </Container>
 
-          <Disclosure.Panel className="px-2 py-2 md:hidden">
+          <DisclosurePanel className="px-2 py-2 md:hidden">
             <div className="space-y-1 rounded-md sm:p-2">
               {navItems.map(item => {
                 const active =
                   item.href === router.pathname ||
                   router.pathname.startsWith(item.href)
                 return (
-                  <Disclosure.Button key={item.name} as={React.Fragment}>
+                  <DisclosureButton key={item.name} as={React.Fragment}>
                     <Link
                       href={item.href}
                       className={clsx(
@@ -253,15 +262,15 @@ function Nav() {
                     >
                       {item.name}
                     </Link>
-                  </Disclosure.Button>
+                  </DisclosureButton>
                 )
               })}
             </div>
             <div className="mt-1 flex space-x-1">
-              <MenuButton onClick={handleThemeClick}>
+              <CustomMenuButton onClick={handleThemeClick}>
                 {getThemeIcon(currentTheme, true)}
-              </MenuButton>
-              <MenuButton
+              </CustomMenuButton>
+              <CustomMenuButton
                 onClick={
                   sessionData ? () => void signOut() : () => void signIn()
                 }
@@ -272,9 +281,9 @@ function Nav() {
                   width: 64,
                   height: 64,
                 })}
-              </MenuButton>
+              </CustomMenuButton>
             </div>
-          </Disclosure.Panel>
+          </DisclosurePanel>
         </>
       )}
     </Disclosure>

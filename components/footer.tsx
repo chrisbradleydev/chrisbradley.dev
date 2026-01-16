@@ -79,7 +79,7 @@ function Footer() {
             >
               <span className="sr-only">{item.name}</span>
               <item.icon
-                className="h-6 w-6 [&_path]:hover:fill-pink-300"
+                className="h-6 w-6 hover:[&_path]:fill-pink-300"
                 aria-hidden="true"
               />
             </a>

@@ -12,7 +12,7 @@ function QuoteCard({quote}: {quote: FrontmatterQuote}) {
     <article className="col-span-4 mb-10 flex flex-col overflow-hidden rounded-b-lg shadow-md transition-transform duration-500 ease-in-out hover:scale-105">
       <Link
         href={`/quotes/${quote.slug}`}
-        className="flex flex-1 flex-col justify-between bg-gradient-to-b from-neutral-200 dark:from-neutral-800 dark:to-neutral-900"
+        className="flex flex-1 flex-col justify-between bg-linear-to-b from-neutral-200 dark:from-neutral-800 dark:to-neutral-900"
       >
         <div className="h-28">
           <svg viewBox="0 0 500 500" preserveAspectRatio="xMinYMin meet">
@@ -40,8 +40,10 @@ function QuoteCard({quote}: {quote: FrontmatterQuote}) {
           </div>
         </div>
       </Link>
-      <div className="px-2 pb-4 pt-2">
-        {quote.tags?.map(tag => <Tag key={tag} tag={tag} />)}
+      <div className="px-2 pt-2 pb-4">
+        {quote.tags?.map(tag => (
+          <Tag key={tag} tag={tag} />
+        ))}
       </div>
     </article>
   )
@@ -77,7 +79,7 @@ function Quotes({quotes}: {quotes: FrontmatterQuote[]}) {
 
   return (
     <Layout pageName="Quotes" header={false}>
-      <div className="relative px-4 pb-20 pt-12 sm:px-6 lg:px-8 lg:pb-28 lg:pt-24">
+      <div className="relative px-4 pt-12 pb-20 sm:px-6 lg:px-8 lg:pt-24 lg:pb-28">
         <div className="relative mx-auto max-w-7xl">
           <div className="text-center">
             <h1 className="text-lg font-semibold text-pink-300">Quotes</h1>
@@ -88,12 +90,12 @@ function Quotes({quotes}: {quotes: FrontmatterQuote[]}) {
               A collection of inspiring and thought-provoking quotes.
             </p>
           </div>
-          <div className="mt-12 text-wrap text-center text-xl lg:text-lg">
+          <div className="mt-12 text-center text-xl text-wrap lg:text-lg">
             {alphabet.split('').map((letter, index) => (
               <span key={letter}>
                 <button
                   type="button"
-                  className={`hover:text-pink-300 ${
+                  className={`cursor-pointer hover:text-pink-300 ${
                     activeInitial === letter ? 'text-pink-300' : ''
                   }`}
                   onClick={() => handleLetterClick(letter)}
