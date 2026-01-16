@@ -5,13 +5,13 @@ import {z} from 'zod'
 export const env = createEnv({
   // only server
   server: {
-    DATABASE_URL: z.string().url(),
+    DATABASE_URL: z.url(),
     GITHUB_ID: z.string(),
     GITHUB_SECRET: z.string(),
     NEXTAUTH_SECRET: z.string(),
     NEXTAUTH_URL: z.string(),
     POSTGRES_URL: z.string(),
-    NODE_ENV: z.enum(['development', 'production']).default('development'),
+    NODE_ENV: z.enum(['development', 'production']).prefault('development'),
   },
   // client and server
   client: {},
