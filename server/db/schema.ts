@@ -40,10 +40,10 @@ export const accounts = createTable(
     id_token: text('id_token'),
     session_state: varchar('session_state', {length: 255}),
   },
-  t => ({
-    compoundKey: primaryKey({columns: [t.provider, t.providerAccountId]}),
-    userIdIdx: index('account_user_id_idx').on(t.userId),
-  }),
+  t => [
+    primaryKey({columns: [t.provider, t.providerAccountId]}),
+    index('account_user_id_idx').on(t.userId),
+  ],
 )
 
 export const accountsRelations = relations(accounts, ({one}) => ({
@@ -88,7 +88,7 @@ export const sessions = createTable(
       .references(() => users.id),
     expires: timestamp('expires', {mode: 'date', withTimezone: true}).notNull(),
   },
-  t => ({userIdIdx: index('session_user_id_idx').on(t.userId)}),
+  t => [index('session_user_id_idx').on(t.userId)],
 )
 
 export const sessionsRelations = relations(sessions, ({one}) => ({
@@ -102,5 +102,5 @@ export const verificationTokens = createTable(
     token: varchar('token', {length: 255}).notNull(),
     expires: timestamp('expires', {mode: 'date', withTimezone: true}).notNull(),
   },
-  t => ({compoundKey: primaryKey({columns: [t.identifier, t.token]})}),
+  t => [primaryKey({columns: [t.identifier, t.token]})],
 )

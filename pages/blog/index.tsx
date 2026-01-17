@@ -10,7 +10,7 @@ function PostCard({post}: {post: FrontmatterPost}) {
     <article className="col-span-4 mb-10 flex flex-col overflow-hidden rounded-b-lg shadow-md transition-transform duration-500 ease-in-out hover:scale-105">
       <Link
         href={`/blog/${post.slug}`}
-        className="flex flex-1 flex-col justify-between bg-gradient-to-b from-neutral-200 dark:from-neutral-800 dark:to-neutral-900"
+        className="flex flex-1 flex-col justify-between bg-linear-to-b from-neutral-200 dark:from-neutral-800 dark:to-neutral-900"
       >
         <div className="h-28">
           <svg viewBox="0 0 500 500" preserveAspectRatio="xMinYMin meet">
@@ -33,8 +33,10 @@ function PostCard({post}: {post: FrontmatterPost}) {
           </div>
         </div>
       </Link>
-      <div className="px-2 pb-4 pt-2">
-        {post.tags?.map(tag => <Tag key={tag} tag={tag} />)}
+      <div className="px-2 pt-2 pb-4">
+        {post.tags?.map(tag => (
+          <Tag key={tag} tag={tag} />
+        ))}
       </div>
     </article>
   )
@@ -43,7 +45,7 @@ function PostCard({post}: {post: FrontmatterPost}) {
 function Blog({posts}: {posts: FrontmatterPost[]}) {
   return (
     <Layout pageName="Blog" header={false}>
-      <div className="relative px-4 pb-20 pt-12 sm:px-6 lg:px-8 lg:pb-28 lg:pt-24">
+      <div className="relative px-4 pt-12 pb-20 sm:px-6 lg:px-8 lg:pt-24 lg:pb-28">
         <div className="relative mx-auto max-w-7xl">
           <div className="text-center">
             <h1 className="text-lg font-semibold text-pink-300">Blog</h1>

@@ -5,7 +5,7 @@ import {useMemo} from 'react'
 
 const MDXHeader = ({children}: {children: string}) => {
   return (
-    <div className="my-10 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl md:text-5xl">
+    <div className="my-10 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl md:text-5xl dark:text-gray-100">
       <h1>{children}</h1>
     </div>
   )
@@ -13,9 +13,9 @@ const MDXHeader = ({children}: {children: string}) => {
 
 const QuoteHeader = ({children}: {children: string}) => {
   return (
-    <div className="my-10 text-center text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl md:text-5xl">
+    <div className="my-10 text-center text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl md:text-5xl dark:text-gray-100">
       <h1>
-        <span className="decoration-3 underline decoration-pink-300 decoration-dashed underline-offset-4">
+        <span className="underline decoration-pink-300 decoration-dashed decoration-3 underline-offset-4">
           {children}
         </span>
       </h1>

@@ -55,7 +55,6 @@ export const createCallerFactory = t.createCallerFactory
 export const createTRPCRouter = t.router
 
 // https://trpc.io/docs/procedures
-
 export const publicProcedure = t.procedure
 
 export const protectedProcedure = t.procedure.use(({ctx, next}) => {
