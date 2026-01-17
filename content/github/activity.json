@@ -1,13 +1,13 @@
 {
   "commit_counts": {
-    "chrisbradley.dev": 172,
+    "chrisbradley.dev": 186,
     "dotfiles": 405,
     "executables": 9,
     "go-htmx": 1,
     "homelab": 19,
     "mermaid-diagrams": 1
   },
-  "last_updated": "2026-01-15T18:38:14.737803Z",
+  "last_updated": "2026-01-17T22:13:52.958277Z",
   "repos": [
     {
       "commit_count": 405,
@@ -25,7 +25,7 @@
       "updated_at": "2026-01-09T17:26:17Z"
     },
     {
-      "commit_count": 172,
+      "commit_count": 186,
       "created_at": "2020-08-17T02:32:58Z",
       "default_branch": "main",
       "description": "Chris Bradley's personal website",
@@ -35,9 +35,9 @@
       "id": 288065988,
       "language": "TypeScript",
       "name": "chrisbradley.dev",
-      "pushed_at": "2025-12-07T23:37:42Z",
+      "pushed_at": "2026-01-17T22:08:38Z",
       "stargazers_count": 1,
-      "updated_at": "2025-12-07T23:37:46Z"
+      "updated_at": "2026-01-17T22:08:42Z"
     },
     {
       "commit_count": 19,
