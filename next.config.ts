@@ -1,8 +1,7 @@
-// @ts-check
-import './env.js'
+import type { NextConfig } from 'next'
+import './env.ts'
 
-/** @type {import("next").NextConfig} */
-const config = {
+const config: NextConfig = {
   experimental: {},
   images: {
     remotePatterns: [
