@@ -9,7 +9,7 @@ function Tags({tags}: {tags: TagsCount}) {
 
   return (
     <Layout pageName="Tags" header={false}>
-      <div className="px-4 pb-20 pt-12 sm:px-6 lg:px-8 lg:pb-28 lg:pt-24">
+      <div className="px-4 pt-12 pb-20 sm:px-6 lg:px-8 lg:pt-24 lg:pb-28">
         <div className="text-center">
           <h1 className="text-lg font-semibold text-pink-300">Tags</h1>
           <h2 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
