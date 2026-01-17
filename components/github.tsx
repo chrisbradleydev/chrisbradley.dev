@@ -59,21 +59,22 @@ function GitHub({activity}: {activity: GitHubActivityResponse}) {
   const getCommitBasedStyle = (commitCount: number) => {
     if (commitCount >= 50) {
       return {
-        border: 'border-gradient-to-r from-purple-500 to-pink-500 border-2',
+        border:
+          'border-gradient-to-r from-purple-500 to-pink-500 border-2 border-transparent',
         shadow: 'shadow-2xl shadow-purple-500/20',
         glow: 'ring-2 ring-purple-500/30',
         badge: 'bg-gradient-to-r from-purple-500 to-pink-500 text-white',
       }
     } else if (commitCount >= 20) {
       return {
-        border: 'border-blue-400 border-2',
+        border: 'border-blue-400 border-2 border-transparent',
         shadow: 'shadow-xl shadow-blue-400/20',
         glow: 'ring-2 ring-blue-400/30',
         badge: 'bg-blue-500 text-white',
       }
     } else if (commitCount >= 10) {
       return {
-        border: 'border-green-400 border-2',
+        border: 'border-green-400 border-2 border-transparent',
         shadow: 'shadow-lg shadow-green-400/20',
         glow: 'ring-1 ring-green-400/20',
         badge: 'bg-green-500 text-white',
@@ -97,7 +98,7 @@ function GitHub({activity}: {activity: GitHubActivityResponse}) {
       <div className="bg-transparent">
         <Container className="px-4 py-16 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
               Recent GitHub Activity
             </h2>
             <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
@@ -117,7 +118,7 @@ function GitHub({activity}: {activity: GitHubActivityResponse}) {
       <div className="bg-transparent">
         <Container className="px-4 py-16 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
               Recent GitHub Activity
             </h2>
             <p className="mt-4 text-lg text-red-600 dark:text-red-400">
@@ -133,7 +134,7 @@ function GitHub({activity}: {activity: GitHubActivityResponse}) {
     <div className="bg-transparent">
       <Container className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
             Recent GitHub Activity
           </h2>
           <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
@@ -154,7 +155,7 @@ function GitHub({activity}: {activity: GitHubActivityResponse}) {
               >
                 {/* Commit Badge */}
                 <div
-                  className={`absolute -right-3 -top-3 rounded-full px-3 py-1 text-xs font-bold ${style.badge}`}
+                  className={`absolute -top-3 -right-3 rounded-full px-3 py-1 text-xs font-bold ${style.badge}`}
                 >
                   {commitCount} commits
                 </div>
@@ -249,7 +250,7 @@ function GitHub({activity}: {activity: GitHubActivityResponse}) {
             href="https://github.com/chrisbradleydev?tab=repositories"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-3 text-base font-medium text-white transition-all hover:from-blue-600 hover:to-purple-700 hover:shadow-lg"
+            className="inline-flex items-center rounded-lg bg-linear-to-r from-blue-500 to-purple-600 px-6 py-3 text-base font-medium text-white transition-all hover:from-blue-600 hover:to-purple-700 hover:shadow-lg"
           >
             View All Repositories
             <svg
