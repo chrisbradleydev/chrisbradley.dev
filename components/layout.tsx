@@ -1,10 +1,10 @@
-import {SpeedInsights} from '@vercel/speed-insights/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import clsx from 'clsx'
 import Head from 'next/head'
 import * as React from 'react'
 import * as THREE from 'three'
-import {projectName} from '~/content/metadata'
-import {Theme, useTheme} from '~/contexts/theme-provider'
+import { projectName } from '~/content/metadata'
+import { Theme, useTheme } from '~/contexts/theme-provider'
 import Container from './container'
 import Footer from './footer'
 import Header from './header'
@@ -78,7 +78,8 @@ const Layout = ({
   const rendererRef = React.useRef<THREE.WebGLRenderer | null>(null)
   const sceneRef = React.useRef<THREE.Scene | null>(null)
   const cameraRef = React.useRef<THREE.PerspectiveCamera | null>(null)
-  const frameIdRef = React.useRef<number>(0)
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
+  const frameRef = React.useRef<number>(0)
   const particlesRef = React.useRef<Particle[]>([])
 
   const speedRef = React.useRef(DEFAULT_SPEED)
@@ -173,8 +174,8 @@ const Layout = ({
 
       // Render scene
       renderer.render(scene, camera)
-      setTimeout(() => {
-        frameIdRef.current = requestAnimationFrame(animate)
+      timeoutRef.current = setTimeout(() => {
+        frameRef.current = requestAnimationFrame(animate)
       }, FRAME_INTERVAL)
     }
 
@@ -212,8 +213,12 @@ const Layout = ({
     const container = containerRef.current
 
     return () => {
-      if (frameIdRef.current) {
-        cancelAnimationFrame(frameIdRef.current)
+      // Clear timeout first to prevent new animation frame from being scheduled
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current)
       }
 
       // Cleanup particles
@@ -235,6 +240,8 @@ const Layout = ({
       document.removeEventListener('mouseup', handleMouseUp)
 
       if (rendererRef.current) {
+        // Prevent WebGL context accumulation
+        rendererRef.current.forceContextLoss()
         rendererRef.current.dispose()
       }
       if (container?.firstChild) {
