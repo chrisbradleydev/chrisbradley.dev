@@ -1,2 +1,6 @@
+# Allow crawlers
 User-agent: *
-Disallow: /
+Allow: /
+
+# Sitemap location
+Sitemap: https://chrisbradley.dev/sitemap.xml

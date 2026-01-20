@@ -30,10 +30,12 @@ export async function getFileBySlug(type: string, slug: string) {
   const remarkPlugins: U.PluggableList = [remarkGfm]
   const rehypePlugins: U.PluggableList = []
   const mdxPath = path.join(root, 'content', type, `${slug}.mdx`)
-  const mdPath = path.join(root, 'content', type, `${slug}.md`)
-  const source = fs.existsSync(mdxPath)
-    ? fs.readFileSync(mdxPath, 'utf8')
-    : fs.readFileSync(mdPath, 'utf8')
+  if (!fs.existsSync(mdxPath)) {
+    console.error('Error locating MDX')
+    return
+  }
+
+  const source = fs.readFileSync(mdxPath, 'utf8')
 
   // https://github.com/kentcdodds/mdx-bundler#nextjs-esbuild-enoent
   if (process.platform === 'win32') {
@@ -98,20 +100,21 @@ export async function getFileBySlug(type: string, slug: string) {
 }
 
 export interface FrontmatterPost {
-  date: string
-  draft?: boolean
+  datePublished: string
+  dateModified: string
+  draft: boolean
   slug: string
-  summary?: string
+  title: string
+  description: string
   tags: string[]
-  title?: string
 }
 
 export interface FrontmatterQuote {
-  date?: string
+  datePublished: string
+  dateModified: string
   author: string
   slug: string
   quote: string
-  comment?: string
   tags: string[]
 }
 
@@ -131,15 +134,20 @@ export function getAllPosts() {
     const {data: frontmatter} = matter(source)
     if (frontmatter.draft !== true) {
       posts.push({
-        tags: [],
-        ...frontmatter,
+        datePublished: new Date(
+          frontmatter.datePublished as Date,
+        ).toISOString(),
+        dateModified: new Date(frontmatter.dateModified as Date).toISOString(),
+        draft: false,
         slug: formatSlug(fileName),
-        date: new Date(frontmatter.date as Date).toISOString(),
+        title: (frontmatter.title as string) ?? '',
+        description: (frontmatter.description as string) ?? '',
+        tags: (frontmatter.tags as string[]) ?? [],
       })
     }
   })
 
-  return posts.sort((a, b) => dateSortDesc(a.date, b.date))
+  return posts.sort((a, b) => dateSortDesc(a.datePublished, b.datePublished))
 }
 
 export function getAllQuotes() {
@@ -156,12 +164,14 @@ export function getAllQuotes() {
     const {data: frontmatter} = matter(source)
     if (frontmatter.draft !== true) {
       quotes.push({
-        tags: [],
-        ...frontmatter,
-        author: (frontmatter.author as string) ?? 'Unknown',
-        quote: (frontmatter.quote as string) ?? '',
-        comment: (frontmatter?.comment as string) ?? '',
+        datePublished: new Date(
+          frontmatter.datePublished as Date,
+        ).toISOString(),
+        dateModified: new Date(frontmatter.dateModified as Date).toISOString(),
+        author: (frontmatter.author as string) ?? '',
         slug: formatSlug(fileName),
+        quote: (frontmatter.quote as string) ?? '',
+        tags: (frontmatter.tags as string[]) ?? [],
       } as FrontmatterQuote)
     }
   })

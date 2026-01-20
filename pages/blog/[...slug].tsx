@@ -1,6 +1,8 @@
 import type {GetStaticPaths, GetStaticProps} from 'next'
+import {ArticleJsonLd, BreadcrumbJsonLd} from '~/components/json-ld'
 import Layout from '~/components/layout'
 import {MDXLayoutRenderer} from '~/components/mdx'
+import {fullName} from '~/content/metadata'
 import {FrontmatterPost, formatSlug, getFileBySlug, getFiles} from '~/utils/mdx'
 
 const Blog = ({
@@ -8,12 +10,46 @@ const Blog = ({
 }: {
   post: {frontmatter: FrontmatterPost; mdxSource: string}
 }) => {
+  const {frontmatter} = post
+  const name = frontmatter.title
+  const url = `/blog/${frontmatter.slug}`
+
   return (
-    <Layout header={false} pageName={post.frontmatter.title ?? 'Untitled'}>
-      {post.frontmatter.draft !== true ? (
-        <MDXLayoutRenderer mdxSource={post.mdxSource} />
-      ) : null}
-    </Layout>
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          {name: 'Home', url: '/'},
+          {name: 'Blog', url: '/blog'},
+          {name, url},
+        ]}
+      />
+      <ArticleJsonLd
+        title={frontmatter.title}
+        description={frontmatter.description}
+        url={url}
+        datePublished={frontmatter.datePublished}
+        dateModified={frontmatter.dateModified}
+      />
+      <Layout
+        header={false}
+        pageName={frontmatter.title}
+        seo={{
+          url,
+          description: frontmatter.description,
+          type: 'article',
+          article: {
+            publishedTime: frontmatter.datePublished,
+            modifiedTime: frontmatter.dateModified,
+            author: fullName,
+            tags: frontmatter.tags,
+          },
+        }}
+      >
+        {frontmatter.draft !== true ? (
+          <MDXLayoutRenderer mdxSource={post.mdxSource} />
+        ) : null}
+      </Layout>
+    </>
   )
 }
 

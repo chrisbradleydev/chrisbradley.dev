@@ -1,14 +1,13 @@
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import clsx from 'clsx'
-import Head from 'next/head'
 import * as React from 'react'
 import * as THREE from 'three'
-import {projectName} from '~/content/metadata'
 import {Theme, useTheme} from '~/contexts/theme-provider'
 import Container from './container'
 import Footer from './footer'
 import Header from './header'
 import Nav from './nav'
+import SEO, {SEOProps} from './seo'
 
 const PARTICLE_COUNT = 200
 const PARTICLE_RADIUS = 2
@@ -24,13 +23,6 @@ interface Particle {
   z: number
   prevZ: number
   mesh: THREE.Points
-}
-
-const getTitle = (pageName: string) => {
-  if (pageName === 'Home') {
-    return projectName
-  }
-  return `${pageName && pageName + ' | '}${projectName}`
 }
 
 const newParticle = (
@@ -65,15 +57,14 @@ const randomizeParticle = (
   return p
 }
 
-const Layout = ({
-  children,
-  header = true,
-  pageName,
-}: {
+interface LayoutProps {
   children: React.ReactNode
   header?: boolean
   pageName: string
-}) => {
+  seo?: SEOProps
+}
+
+const Layout = ({children, header = true, pageName, seo}: LayoutProps) => {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const rendererRef = React.useRef<THREE.WebGLRenderer | null>(null)
   const sceneRef = React.useRef<THREE.Scene | null>(null)
@@ -250,11 +241,11 @@ const Layout = ({
     }
   }, [theme])
 
+  const seoTitle = pageName === 'Home' ? undefined : pageName
+
   return (
     <>
-      <Head>
-        <title>{getTitle(pageName)}</title>
-      </Head>
+      <SEO title={seoTitle} {...seo} />
       <div className={clsx(theme ?? 'relative')}>
         <div className="flex min-h-screen flex-col bg-white transition duration-500 dark:bg-neutral-900 dark:text-white">
           <Nav />

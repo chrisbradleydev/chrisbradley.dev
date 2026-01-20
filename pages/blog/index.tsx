@@ -1,8 +1,10 @@
 import type {GetStaticProps} from 'next'
 import Link from 'next/link'
 import Grid from '~/components/grid'
+import {BreadcrumbJsonLd} from '~/components/json-ld'
 import Layout from '~/components/layout'
 import Tag from '~/components/tag'
+import {fullName} from '~/content/metadata'
 import {FrontmatterPost, getAllPosts} from '~/utils/mdx'
 
 function PostCard({post}: {post: FrontmatterPost}) {
@@ -29,7 +31,9 @@ function PostCard({post}: {post: FrontmatterPost}) {
         <div className="grow">
           <div className="mt-2 block px-6 py-8">
             <p className="text-xl font-semibold">{post.title ?? 'Untitled'}</p>
-            <p className="mt-3 text-base text-neutral-500">{post.summary}</p>
+            <p className="mt-3 text-base text-neutral-500">
+              {post.description}
+            </p>
           </div>
         </div>
       </Link>
@@ -43,28 +47,47 @@ function PostCard({post}: {post: FrontmatterPost}) {
 }
 
 function Blog({posts}: {posts: FrontmatterPost[]}) {
+  const name = 'Blog'
+  const url = '/blog'
+  const heading = 'Tales from the script'
+
   return (
-    <Layout pageName="Blog" header={false}>
-      <div className="relative px-4 pt-12 pb-20 sm:px-6 lg:px-8 lg:pt-24 lg:pb-28">
-        <div className="relative mx-auto max-w-7xl">
-          <div className="text-center">
-            <h1 className="text-lg font-semibold text-pink-300">Blog</h1>
-            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-              Tales from the script
-            </h2>
-            <p className="mx-auto mt-5 max-w-xl text-xl text-neutral-500">
-              What&apos;s worse, life without fiber internet or developing on
-              windows? Join me to tackle the tough questions.
-            </p>
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          {name: 'Home', url: '/'},
+          {name, url},
+        ]}
+      />
+      <Layout
+        pageName={name}
+        header={false}
+        seo={{
+          url,
+          description: `${heading} - Blog posts by ${fullName} on software development, technology, and more.`,
+        }}
+      >
+        <div className="relative px-4 pt-12 pb-20 sm:px-6 lg:px-8 lg:pt-24 lg:pb-28">
+          <div className="relative mx-auto max-w-7xl">
+            <div className="text-center">
+              <h1 className="text-lg font-semibold text-pink-300">{name}</h1>
+              <h2 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+                {heading}
+              </h2>
+              <p className="mx-auto mt-5 max-w-xl text-xl text-neutral-500">
+                What&apos;s worse, life without fiber internet or developing on
+                windows? Join me to tackle the tough questions.
+              </p>
+            </div>
+            <Grid className="mt-12">
+              {posts.length
+                ? posts.map(post => <PostCard key={post.slug} post={post} />)
+                : null}
+            </Grid>
           </div>
-          <Grid className="mt-12">
-            {posts.length
-              ? posts.map(post => <PostCard key={post.slug} post={post} />)
-              : null}
-          </Grid>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   )
 }
 

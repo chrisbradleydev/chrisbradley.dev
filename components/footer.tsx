@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {projectName} from '~/content/metadata'
+import {siteName} from '~/content/metadata'
 import Container from './container'
 
 const navItems = [
@@ -87,8 +87,7 @@ function Footer() {
         </div>
         <div className="mt-8 md:order-1 md:mt-0">
           <p className="text-center text-base">
-            &copy; {new Date().getFullYear()} {projectName}. All rights
-            reserved.
+            &copy; {new Date().getFullYear()} {siteName}. All rights reserved.
           </p>
         </div>
       </Container>

@@ -2,10 +2,12 @@ import type {GetStaticProps} from 'next'
 import Link from 'next/link'
 import * as React from 'react'
 import Grid from '~/components/grid'
+import {BreadcrumbJsonLd} from '~/components/json-ld'
 import Layout from '~/components/layout'
 import Tag from '~/components/tag'
+import {fullName} from '~/content/metadata'
 import {FrontmatterQuote, getAllQuotes} from '~/utils/mdx'
-import {stringToRomanNumeral} from '~/utils/numbers'
+import {slugToRomanNumeral} from '~/utils/numbers'
 
 function QuoteCard({quote}: {quote: FrontmatterQuote}) {
   return (
@@ -32,7 +34,7 @@ function QuoteCard({quote}: {quote: FrontmatterQuote}) {
           <div className="mt-2 block px-6 py-8">
             <p className="text-xl font-semibold">
               {quote.author ?? 'Unknown'}
-              {stringToRomanNumeral(quote.slug)}
+              {slugToRomanNumeral(quote.slug)}
             </p>
             <p className="text-xl font-semibold">
               &quot;{quote.quote ?? ''}&quot;
@@ -77,50 +79,69 @@ function Quotes({quotes}: {quotes: FrontmatterQuote[]}) {
     setActiveInitial(activeInitial === letter ? null : letter)
   }
 
+  const name = 'Quotes'
+  const url = '/quotes'
+  const heading = 'Words of Wisdom'
+
   return (
-    <Layout pageName="Quotes" header={false}>
-      <div className="relative px-4 pt-12 pb-20 sm:px-6 lg:px-8 lg:pt-24 lg:pb-28">
-        <div className="relative mx-auto max-w-7xl">
-          <div className="text-center">
-            <h1 className="text-lg font-semibold text-pink-300">Quotes</h1>
-            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-              Words of Wisdom
-            </h2>
-            <p className="mx-auto mt-5 max-w-xl text-xl text-neutral-500">
-              A collection of inspiring and thought-provoking quotes.
-            </p>
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          {name: 'Home', url: '/'},
+          {name, url},
+        ]}
+      />
+      <Layout
+        pageName={name}
+        header={false}
+        seo={{
+          url,
+          description: `${heading} - A collection of inspiring and thought-provoking quotes curated by ${fullName}.`,
+        }}
+      >
+        <div className="relative px-4 pt-12 pb-20 sm:px-6 lg:px-8 lg:pt-24 lg:pb-28">
+          <div className="relative mx-auto max-w-7xl">
+            <div className="text-center">
+              <h1 className="text-lg font-semibold text-pink-300">{name}</h1>
+              <h2 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+                {heading}
+              </h2>
+              <p className="mx-auto mt-5 max-w-xl text-xl text-neutral-500">
+                A collection of inspiring and thought-provoking quotes.
+              </p>
+            </div>
+            <div className="mt-12 text-center text-xl text-wrap lg:text-lg">
+              {alphabet.split('').map((letter, index) => (
+                <span key={letter}>
+                  <button
+                    type="button"
+                    className={`cursor-pointer hover:text-pink-300 ${
+                      activeInitial === letter ? 'text-pink-300' : ''
+                    }`}
+                    onClick={() => handleLetterClick(letter)}
+                  >
+                    {letter.toUpperCase()}
+                  </button>
+                  {index < alphabet.length - 1 && (
+                    <span className="mx-4 text-neutral-500 lg:mx-2">|</span>
+                  )}
+                </span>
+              ))}
+            </div>
+            <Grid className="mt-12">
+              {quotes.length
+                ? quotes.map(
+                    quote =>
+                      quote.author.startsWith(
+                        activeInitial?.toUpperCase() ?? '',
+                      ) && <QuoteCard key={quote.slug} quote={quote} />,
+                  )
+                : null}
+            </Grid>
           </div>
-          <div className="mt-12 text-center text-xl text-wrap lg:text-lg">
-            {alphabet.split('').map((letter, index) => (
-              <span key={letter}>
-                <button
-                  type="button"
-                  className={`cursor-pointer hover:text-pink-300 ${
-                    activeInitial === letter ? 'text-pink-300' : ''
-                  }`}
-                  onClick={() => handleLetterClick(letter)}
-                >
-                  {letter.toUpperCase()}
-                </button>
-                {index < alphabet.length - 1 && (
-                  <span className="mx-4 text-neutral-500 lg:mx-2">|</span>
-                )}
-              </span>
-            ))}
-          </div>
-          <Grid className="mt-12">
-            {quotes.length
-              ? quotes.map(
-                  quote =>
-                    quote.author.startsWith(
-                      activeInitial?.toUpperCase() ?? '',
-                    ) && <QuoteCard key={quote.slug} quote={quote} />,
-                )
-              : null}
-          </Grid>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   )
 }
 

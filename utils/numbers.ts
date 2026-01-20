@@ -3,7 +3,7 @@ const romanNumerals: [string[], string[]] = [
   ['', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'],
 ]
 
-function intToRoman(num: number): string {
+export const intToRoman = (num: number): string => {
   const tensDigits = romanNumerals[1]
   const onesDigits = romanNumerals[0]
   if (!tensDigits || !onesDigits) return ''
@@ -15,8 +15,8 @@ function intToRoman(num: number): string {
   )
 }
 
-export const stringToRomanNumeral = (s: string): string => {
-  const match = /-(\d+)$/.exec(s)
+export const slugToRomanNumeral = (slug: string): string => {
+  const match = /-(\d+)$/.exec(slug)
   const num = match?.[1]
   return num && parseInt(num) > 1 ? ` ${intToRoman(parseInt(num))}` : ''
 }

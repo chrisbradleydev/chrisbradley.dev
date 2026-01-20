@@ -1,17 +1,33 @@
 import type {GetStaticProps} from 'next'
 import GitHub, {GitHubActivityResponse} from '~/components/github'
 import Hero from '~/components/hero'
+import {WebSiteJsonLd} from '~/components/json-ld'
 import Layout from '~/components/layout'
 import activity from '~/content/github/activity.json'
+import {defaultDescription, siteName, siteUrl} from '~/content/metadata'
 
 function Home({activity}: {activity: GitHubActivityResponse}) {
   return (
-    <Layout pageName="Home" header={false}>
-      <Hero />
-      <div>
-        <GitHub activity={activity} />
-      </div>
-    </Layout>
+    <>
+      <WebSiteJsonLd
+        name={siteName}
+        url={siteUrl}
+        description={defaultDescription}
+      />
+      <Layout
+        pageName="Home"
+        header={false}
+        seo={{
+          url: '/',
+          description: defaultDescription,
+        }}
+      >
+        <Hero />
+        <div>
+          <GitHub activity={activity} />
+        </div>
+      </Layout>
+    </>
   )
 }
 
