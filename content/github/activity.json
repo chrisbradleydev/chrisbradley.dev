@@ -9,11 +9,11 @@
       "stargazers_count": 4,
       "forks_count": 1,
       "language": "Shell",
-      "updated_at": "2026-01-28T11:25:27Z",
+      "updated_at": "2026-02-12T15:38:47Z",
       "created_at": "2019-01-21T05:09:24Z",
-      "pushed_at": "2026-01-28T11:25:23Z",
+      "pushed_at": "2026-02-12T15:29:09Z",
       "default_branch": "main",
-      "commit_count": 411
+      "commit_count": 413
     },
     {
       "id": 288065988,
@@ -24,11 +24,11 @@
       "stargazers_count": 1,
       "forks_count": 0,
       "language": "TypeScript",
-      "updated_at": "2026-01-29T22:11:06Z",
+      "updated_at": "2026-03-12T02:55:56Z",
       "created_at": "2020-08-17T02:32:58Z",
-      "pushed_at": "2026-01-29T22:11:02Z",
+      "pushed_at": "2026-03-12T02:55:52Z",
       "default_branch": "main",
-      "commit_count": 191
+      "commit_count": 193
     },
     {
       "id": 922055636,
@@ -92,12 +92,12 @@
     }
   ],
   "commit_counts": {
-    "chrisbradley.dev": 191,
-    "dotfiles": 411,
+    "chrisbradley.dev": 193,
+    "dotfiles": 413,
     "executables": 9,
     "go-htmx": 1,
     "homelab": 19,
     "mermaid-diagrams": 1
   },
-  "last_updated": "2026-01-29T22:14:15.413417Z"
+  "last_updated": "2026-03-12T02:58:51.45914Z"
 }
