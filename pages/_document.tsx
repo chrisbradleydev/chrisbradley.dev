@@ -12,7 +12,11 @@ const links = [
 
 function Document() {
   return (
-    <Html className="h-full scroll-smooth antialiased" lang="en">
+    <Html
+      data-scroll-behavior="smooth"
+      className="h-full scroll-smooth antialiased"
+      lang="en"
+    >
       <Head>
         {links.map(link => (
           <link
