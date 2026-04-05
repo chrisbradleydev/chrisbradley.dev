@@ -19,19 +19,21 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "dev": "next dev --turbo",
-    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,html,css,json}\" --cache",
-    "format:write": "prettier --write \"**/*.{js,jsx,ts,tsx,html,css,json}\" --cache",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,css,html,json}\" --cache",
+    "format:write": "prettier --write \"**/*.{js,jsx,ts,tsx,css,html,json}\" --cache",
+    "prepare": "husky",
     "lint": "eslint .",
+    "lint-staged": "lint-staged",
     "start": "next start"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": "eslint --fix",
-    "**/*.{js,jsx,ts,tsx,html,css,json}": "prettier --write"
+    "**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "**/*.{css,html,json}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.1",
