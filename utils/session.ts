@@ -16,5 +16,5 @@ export async function getSession(
   options: GetSessionParams,
 ): Promise<Session | null> {
   const session = await getNextSession(options)
-  return session as Session | null
+  return session
 }

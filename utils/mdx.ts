@@ -172,7 +172,7 @@ export function getAllQuotes() {
         slug: formatSlug(fileName),
         quote: (frontmatter.quote as string) ?? '',
         tags: (frontmatter.tags as string[]) ?? [],
-      } as FrontmatterQuote)
+      })
     }
   })
 

@@ -1,6 +1,5 @@
 import {DrizzleAdapter} from '@auth/drizzle-adapter'
 import {type DefaultSession, type NextAuthConfig} from 'next-auth'
-import type {Adapter} from 'next-auth/adapters'
 import GitHubProvider from 'next-auth/providers/github'
 import {env} from '~/env'
 import {db} from '~/server/db'
@@ -29,7 +28,7 @@ export const authConfig = {
     accountsTable: accounts,
     sessionsTable: sessions,
     verificationTokensTable: verificationTokens,
-  }) as Adapter,
+  }),
   providers: [
     GitHubProvider({clientId: env.GITHUB_ID, clientSecret: env.GITHUB_SECRET}),
   ],

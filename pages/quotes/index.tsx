@@ -53,30 +53,38 @@ function QuoteCard({quote}: {quote: FrontmatterQuote}) {
 
 const alphabet = 'abcdefghijklmnopqrstuvwxyz'
 
+function subscribeToHash(onStoreChange: () => void) {
+  window.addEventListener('hashchange', onStoreChange)
+  return () => window.removeEventListener('hashchange', onStoreChange)
+}
+
+function getHashSnapshot() {
+  const hash = window.location.hash.slice(1)
+  return hash && alphabet.includes(hash) ? hash : null
+}
+
 function Quotes({quotes}: {quotes: FrontmatterQuote[]}) {
-  const [activeInitial, setActiveInitial] = React.useState<string | null>(null)
+  const activeInitial = React.useSyncExternalStore(
+    subscribeToHash,
+    getHashSnapshot,
+    () => null, // SSR / first paint,
+  )
 
-  React.useEffect(() => {
-    const hash = window.location.hash.slice(1)
-    if (hash && alphabet.includes(hash)) {
-      setActiveInitial(hash)
-    }
-  }, [])
-
-  React.useEffect(() => {
-    if (activeInitial) {
-      window.location.hash = activeInitial
-    } else {
+  const handleLetterClick = (letter: string) => {
+    if (activeInitial === letter) {
       window.history.pushState(
         '',
         document.title,
         window.location.pathname + window.location.search,
       )
+    } else {
+      // https://github.com/react/react/issues/34776
+      // https://github.com/react/react/issues/35158
+      // eslint-disable-next-line react-hooks/immutability
+      window.location.hash = letter
     }
-  }, [activeInitial])
-
-  const handleLetterClick = (letter: string) => {
-    setActiveInitial(activeInitial === letter ? null : letter)
+    // pushState doesn't fire hashchange, so nudge the store manually
+    window.dispatchEvent(new HashChangeEvent('hashchange'))
   }
 
   const name = 'Quotes'
