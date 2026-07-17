@@ -6,10 +6,10 @@
       "full_name": "chrisbradleydev/dotfiles",
       "description": "Living that shell life",
       "html_url": "https://github.com/chrisbradleydev/dotfiles",
-      "stargazers_count": 4,
+      "stargazers_count": 5,
       "forks_count": 1,
       "language": "Shell",
-      "updated_at": "2026-04-24T11:27:05Z",
+      "updated_at": "2026-05-23T09:01:19Z",
       "created_at": "2019-01-21T05:09:24Z",
       "pushed_at": "2026-04-24T11:27:01Z",
       "default_branch": "main",
@@ -24,11 +24,11 @@
       "stargazers_count": 1,
       "forks_count": 0,
       "language": "TypeScript",
-      "updated_at": "2026-04-25T11:29:51Z",
+      "updated_at": "2026-07-17T21:58:33Z",
       "created_at": "2020-08-17T02:32:58Z",
-      "pushed_at": "2026-04-25T11:29:47Z",
+      "pushed_at": "2026-07-17T21:58:29Z",
       "default_branch": "main",
-      "commit_count": 203
+      "commit_count": 209
     },
     {
       "id": 922055636,
@@ -92,12 +92,12 @@
     }
   ],
   "commit_counts": {
-    "chrisbradley.dev": 203,
+    "chrisbradley.dev": 209,
     "dotfiles": 423,
     "executables": 10,
     "go-htmx": 1,
     "homelab": 19,
     "mermaid-diagrams": 1
   },
-  "last_updated": "2026-04-25T11:31:01.732539Z"
+  "last_updated": "2026-07-17T22:09:59.923386Z"
 }
