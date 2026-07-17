@@ -67,7 +67,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.6",
     "@eslint/js": "^9.39.5",
-    "@tailwindcss/postcss": "^4.3.2",
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/eslint": "^9.6.1",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.17",
@@ -82,11 +82,11 @@
     "husky": "^9.1.7",
     "lint-staged": "^17.0.8",
     "next-sitemap": "^4.2.3",
-    "postcss": "^8.5.16",
+    "postcss": "^8.5.19",
     "prettier": "3.9.5",
-    "prettier-plugin-tailwindcss": "^0.8.0",
-    "tailwindcss": "^4.3.2",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.63.0"
+    "typescript-eslint": "^8.64.0"
   }
 }
